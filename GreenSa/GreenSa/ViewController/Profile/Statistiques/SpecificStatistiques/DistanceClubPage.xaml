@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GreenSa.ViewController.Profile.Statistiques.SpecificStatistiques.DistanceClubPage"
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             xmlns:viewelements="clr-namespace:GreenSa.Models.ViewElements"
+             NavigationPage.HasNavigationBar="false">
+
+    <microcharts:ChartView x:Name="chartView" />
+    <!--<ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <viewelements:MyLabel Text="Distances moyennes de vos clubs" FontAttributes="Bold" FontSize="15" HorizontalOptions="Center"  Margin="0, 10, 0, 5"/>
+        </StackLayout>
+           
+       
+    </ContentPage.Content>-->
+
+</ContentPage>

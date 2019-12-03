@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Club>
+  <Name>Pitching</Name>
+  <DistanceMoyenne Index="0">115</DistanceMoyenne>
+  <DistanceMoyenne Index="10">105</DistanceMoyenne>
+  <DistanceMoyenne Index="20">85</DistanceMoyenne>
+  <DistanceMoyenne Index="30">80</DistanceMoyenne>
+  <DistanceMoyenne Index="40">70</DistanceMoyenne>
+</Club>

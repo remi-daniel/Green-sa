@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GreenSa.ViewController.Profile.Options.ProfileOptions"
+             xmlns:viewElements="clr-namespace:GreenSa.Models.ViewElements"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid x:Name="page" RowSpacing="0">
+            
+            <Grid.RowDefinitions>
+                <RowDefinition x:Name="haut" Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Image x:Name="logo" Source="fond_profile_page.png" Grid.Row="0"
+                    HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand"
+                    />
+            <Image x:Name="photo" Source="user1.png" Grid.Row="0"
+                    HorizontalOptions="Center" VerticalOptions="Start"/>
+            <ImageButton x:Name="modifier" Source="modifier_photo.png" BackgroundColor="Transparent"
+                       HorizontalOptions="Center" VerticalOptions="Start" 
+                       Clicked="OnPhotoClicked"
+                       />
+            <Button Text="OK" TextColor="White" FontAttributes="Bold"
+                       x:Name="arrow" BackgroundColor="Transparent"
+                       HorizontalOptions="Start" VerticalOptions="Start" 
+                       Clicked="OnArrowClicked"
+                       />
+            <Grid x:Name="boutons" Grid.Row="1" Grid.Column="0" RowSpacing="8">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" x:Name="t1"/>
+                    <RowDefinition Height="*" x:Name="r1"/>
+                    <RowDefinition Height="*" x:Name="t2"/>
+                    <RowDefinition Height="*" x:Name="r2"/>
+                    <RowDefinition Height="*" x:Name="t3"/>
+                    <RowDefinition Height="*" x:Name="r3"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Label x:Name="usernametitle" Grid.Row="0" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="End"
+                       Text="Pseudo :" TextColor="Gray"/>
+                <Entry x:Name="username" Grid.Row="1" Grid.Column="0" VerticalOptions="Start"
+                       PlaceholderColor="White" MaxLength="15" 
+                       TextColor="Black"
+                       IsSpellCheckEnabled="False"
+                       Completed="OnNameCompleted"
+                       HorizontalTextAlignment="Center"
+                       BackgroundColor="Transparent"
+                       FontAttributes="Bold"/>
+
+                <Label x:Name="indextitle" Grid.Row="2" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="End"
+                       Text="Index :" TextColor="Gray"/>
+                <Entry x:Name="index" Grid.Row="3" Grid.Column="0" VerticalOptions="Start"
+                       PlaceholderColor="White" MaxLength="15" 
+                       TextColor="Black"
+                       IsSpellCheckEnabled="False"
+                       Completed="OnIndexCompleted"
+                       HorizontalTextAlignment="Center"
+                       Keyboard="Numeric"
+                       BackgroundColor="Transparent"
+                       FontAttributes="Bold"/>
+
+                <Label x:Name="golfreftitle" Grid.Row="4" Grid.Column="0" HorizontalOptions="CenterAndExpand" VerticalOptions="End"
+                       Text="Golf de Référence :" TextColor="Gray"/>
+                <Entry x:Name="golfref" Grid.Row="5" Grid.Column="0" VerticalOptions="Start"
+                       PlaceholderColor="Black" MaxLength="50" 
+                       TextColor="Black"
+                       IsSpellCheckEnabled="False"
+                       Completed="OnGolfRefCompleted"
+                       HorizontalTextAlignment="Center"
+                       BackgroundColor="Transparent"
+                       FontAttributes="Bold"/>
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

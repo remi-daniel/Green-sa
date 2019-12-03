@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Club>
+  <Name>Putter</Name>
+  <DistanceMoyenne Index="0">0</DistanceMoyenne>
+  <DistanceMoyenne Index="10">0</DistanceMoyenne>
+  <DistanceMoyenne Index="20">0</DistanceMoyenne>
+  <DistanceMoyenne Index="30">0</DistanceMoyenne>
+  <DistanceMoyenne Index="40">0</DistanceMoyenne>
+</Club>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<GolfCourse>
+    <Name>P&amp;P Saint Jacques</Name>
+    <NbTrous>9</NbTrous>
+    <NomGolf>Saint Jacques</NomGolf>
+    <Coordinates>
+        <Trou>
+            <par> 3 </par>
+            <lat> 48,068111 </lat>
+            <lng> -1,74588 </lng>
+        </Trou>
+        <Trou>
+            <par> 3 </par>
+            <lat> 48,069038 </lat>
+            <lng> -1,745054 </lng>
+        </Trou>
+        <Trou>
+            <par> 3 </par>
+            <lat>  48,068621 </lat>
+            <lng> -1,743782 </lng>
+        </Trou>
+        <Trou>
+            <par> 3 </par>
+            <lat>  48,068768 </lat>
+            <lng> -1,742838 </lng>
+        </Trou>
+        <Trou>
+            <par> 3 </par>
+            <lat>  48,06782 </lat>
+            <lng> -1,741763 </lng>
+        </Trou>
+        <Trou>
+            <par> 3 </par>
+            <lat>  48,068186 </lat>
+            <lng> -1.742931 </lng>
+        </Trou>
+        <Trou>
+            <par> 3 </par>
+            <lat>  48,068245 </lat>
+            <lng> -1,74437 </lng>
+        </Trou>
+        <Trou>
+            <par> 3 </par>
+            <lat>  48,067713 </lat>
+            <lng> -1,743837 </lng>
+        </Trou>
+        <Trou>
+            <par> 3 </par>
+            <lat>  48,067563 </lat>
+            <lng> -1,745477 </lng>
+        </Trou>
+    </Coordinates>
+</GolfCourse>

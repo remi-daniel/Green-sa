@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:GreenSa.Models.Tools.GPS_Maps"
+             xmlns:local2="clr-namespace:GreenSa.MarkupExtension"
+             xmlns:local3="clr-namespace:GreenSa.Models.ViewElements"
+             x:Class="GreenSa.ViewController.Play.Game.MainGamePage"
+             NavigationPage.HasBackButton="False"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid x:Name="page" Margin="0">
+
+            <local:CustomMap x:Name="map" MapType="Satellite"
+                       VerticalOptions="FillAndExpand"/>
+
+            <Image x:Name="top" Source="top_game_page.png"
+              HorizontalOptions="CenterAndExpand" VerticalOptions="Start"/>
+
+            <Image x:Name="bottom" Source="bottom_game_page.png"
+              HorizontalOptions="CenterAndExpand" VerticalOptions="End"/>
+
+            <Label x:Name="numcoup" Text="1" FontAttributes="Bold"
+                 VerticalOptions="Start" HorizontalOptions="Center" Margin="5" TextColor="White"/>
+
+            <Label x:Name="parTrou" Text="PAR 4" FontAttributes="Bold"
+              VerticalOptions="Start" HorizontalOptions="Center" Margin="10" TextColor="White"/>
+
+            <Grid x:Name="distGrid" VerticalOptions="Start" HorizontalOptions="End" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Label x:Name="distTrou" Grid.Row="0" VerticalOptions="End" HorizontalOptions="Start" Text="0m" FontAttributes="Bold" TextColor="White"/>
+                <Label x:Name="distTarget" Grid.Row="1" VerticalOptions="Start" HorizontalOptions="Start" Text="0m + 0m" FontAttributes="Bold" TextColor="White"/>
+            </Grid>
+
+            <Label x:Name="forceVent" Text="0.0 km/h" FontAttributes="Bold" FontSize="17"
+              VerticalOptions="Start" HorizontalOptions="Start" TextColor="White"/>
+
+            <Image x:Name="windImg" Source="windImg.png"
+                  HorizontalOptions="Start" VerticalOptions="Start"/>
+
+            <ImageButton x:Name="ball" Source="ball.png"
+                   HorizontalOptions="Center" VerticalOptions="End"
+                   Clicked="onMainButtonClicked" BackgroundColor="Transparent"/>
+            <ImageButton x:Name="radar" Source="radar.png"
+                   HorizontalOptions="Center" VerticalOptions="End"
+                   Clicked="onMainButtonClicked" BackgroundColor="Transparent"/>
+            <Image x:Name="load" Source="radarWait.png"
+                   HorizontalOptions="Center" VerticalOptions="End"
+                   BackgroundColor="Transparent"/>
+
+            <ImageButton x:Name="backToRadar" Source="radar.png"
+                   HorizontalOptions="Start" VerticalOptions="End"
+                   Clicked="onRelocalizeAction" BackgroundColor="Transparent"/>
+
+            <ImageButton x:Name="backToBall" Source="backarrow.png"
+                   HorizontalOptions="Start" VerticalOptions="End"
+                   Clicked="onBackToBallClicked" BackgroundColor="Transparent"/>
+
+            <ImageButton x:Name="clubs" Source="fer.png"
+                   HorizontalOptions="Start" VerticalOptions="End"
+                   Clicked="onClubSelectionClicked" BackgroundColor="Transparent"/>
+
+            <Label x:Name="numclub" Text="4" FontAttributes="Bold" FontSize="20"
+             HorizontalOptions="Start" VerticalOptions="End"/>
+
+            <ImageButton x:Name="ball_in" Source="hole_done.png"
+                   HorizontalOptions="End" VerticalOptions="End"
+                   Clicked="onHoleFinishedButtonClicked" BackgroundColor="Transparent"/>
+
+            <BoxView x:Name="clubselection" HorizontalOptions="Start" VerticalOptions="End"/>
+            <ListView x:Name="ListClubsPartie">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <TextCell TextColor="White" Text="{Binding Name}" Tapped="OnClubClicked"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+            <BoxView x:Name="cardBackground" HorizontalOptions="End" VerticalOptions="End"/>
+            <Button x:Name="score" Text="+2"
+              HorizontalOptions="End" VerticalOptions="End"
+              Clicked="OnScoreClicked" BackgroundColor="Transparent"
+              FontAttributes ="Bold" FontSize ="28" TextColor="White"/>
+
+            <ListView x:Name="ListHole">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <local3:ScoreCardCell/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>
+    

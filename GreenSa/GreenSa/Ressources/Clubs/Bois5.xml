@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Club>
+  <Name>Bois 5</Name>
+  <DistanceMoyenne Index="0">210</DistanceMoyenne>
+  <DistanceMoyenne Index="10">190</DistanceMoyenne>
+  <DistanceMoyenne Index="20">170</DistanceMoyenne>
+  <DistanceMoyenne Index="30">155</DistanceMoyenne>
+  <DistanceMoyenne Index="40">135</DistanceMoyenne>
+</Club>

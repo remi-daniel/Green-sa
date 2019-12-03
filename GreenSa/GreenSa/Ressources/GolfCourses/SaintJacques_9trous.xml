@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8" ?> 
+ <GolfCourse>
+   <Name>9 trous Saint Jacques</Name>
+   <NbTrous>9</NbTrous>
+   <NomGolf>Saint Jacques</NomGolf>
+   <Coordinates>
+     <Trou>
+       <par>4</par>
+       <lat>48,070325</lat>
+       <lng>-1,746956</lng>
+     </Trou>
+     <Trou>
+       <par>4</par>
+       <lat> 48,06957</lat>
+       <lng>-1,744317</lng>
+     </Trou>
+     <Trou>
+       <par>3</par>
+       <lat>48,068987</lat>
+       <lng>-1,74351</lng>
+     </Trou>
+     <Trou>
+       <par>4</par>
+       <lat>48,071311</lat>
+       <lng>-1,74638</lng>
+     </Trou>
+     <Trou>
+       <par>3</par>
+       <lat>48,071182</lat>
+       <lng>-1,747844</lng>
+     </Trou>
+     <Trou>
+       <par>3</par>
+       <lat>48,069631</lat>
+       <lng>-1,748327</lng>
+     </Trou>
+     <Trou>
+       <par>4</par>
+       <lat>48,072125</lat>
+       <lng>-1,748555</lng>
+     </Trou>
+     <Trou>
+       <par>3</par>
+       <lat>48,07246</lat>
+       <lng>-1,749323</lng>
+     </Trou>
+     <Trou>
+        <par>4</par>
+       <lat>48,068859</lat>
+       <lng>-1,749293</lng>
+     </Trou>
+   </Coordinates>
+</GolfCourse>

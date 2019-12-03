@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GreenSa.ViewController.Test.SeeBDContent">
+    <ContentPage.Content>
+      
+            <ScrollView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            <StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Button Text ="Golfcourse" Clicked="seeGolfCourse"/>
+                    <Button Text ="Shot" Clicked="seeShot"/>
+                    <Button Text ="Positions" Clicked="seePosition"/>
+
+                </StackLayout>
+                <StackLayout Orientation="Horizontal">
+                    <Button Text ="Clubs" Clicked="seeClub"/>
+                    <Button Text ="Holes" Clicked="seeHoles"/>
+                    <Button Text ="Scores" Clicked="seeScore"/>
+                    <Button Text ="Parties" Clicked="seeParties"/>
+                </StackLayout>
+                <Button Text ="Drop Tables" Clicked="dropAllTable" BackgroundColor="Red"/>
+
+                <StackLayout Orientation="Horizontal">
+                </StackLayout>
+                <Label x:Name="label" Text="Contenu"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" />
+            </StackLayout>
+        </ScrollView>
+        
+    </ContentPage.Content>
+</ContentPage>

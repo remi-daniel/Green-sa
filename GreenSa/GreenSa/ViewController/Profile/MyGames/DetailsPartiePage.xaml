@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GreenSa.ViewController.Profile.MyGames.DetailsPartiePage">
+    <ContentPage.Content>
+        <Grid x:Name="page">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="23*"/>
+                <RowDefinition Height="77*"/>
+            </Grid.RowDefinitions>
+            <Image x:Name="logo" Source="scorecard_top.png" Grid.Row="0" HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" />
+            <Label x:Name="score" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="Start" 
+                   Text="+4" FontSize="35" FontAttributes="Bold" TextColor="Black"/>
+            <Grid x:Name="title" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Start">
+                <Label x:Name="partie" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center" 
+                   FontSize="19" FontAttributes="Bold" TextColor="White" Text="9 trous Saint-Jacques : " />
+                <Label x:Name="date" Grid.Row="1" HorizontalOptions="Start" VerticalOptions="Center"
+                   FontSize="19" TextColor="White" Text="02/05/2019" Margin="10, 0, 0, 0"/>
+            </Grid>
+            
+
+            <Grid Grid.Row="1" VerticalOptions="Fill" Margin="0, -5, 0, 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="13*"/>
+                    <RowDefinition Height="76*"/>
+                    <RowDefinition Height="11*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" HorizontalOptions="Fill" BackgroundColor="LightGray">
+                    <Label Grid.Column="0" TextColor="Black" HorizontalOptions="Center" FontSize="23" FontAttributes="Bold" VerticalOptions="Center" Text="Trou" Margin="0"/>
+                    <Label Grid.Column="1" TextColor="Black" HorizontalOptions="Center" FontSize="23" FontAttributes="Bold" VerticalOptions="Center" Text="Par" Margin="0"/>
+                    <Label Grid.Column="2" TextColor="Black" HorizontalOptions="Center" FontSize="21" VerticalOptions="Center" Text="Putt" Margin="0"/>
+                    <Label Grid.Column="3" TextColor="Black" HorizontalOptions="Center" FontSize="21" VerticalOptions="Center" Text="Pen." Margin="0"/>
+                    <Label Grid.Column="4" TextColor="Black" HorizontalOptions="Center" FontSize="23" FontAttributes="Bold" VerticalOptions="Center" Text="Score" Margin="0, 0, 5, 0"/>
+                </Grid>
+                <ListView x:Name="listScore" Grid.Row="1">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <Grid>
+                                    <Frame Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="3" BackgroundColor="LightGreen" OutlineColor="DarkGreen" Padding="5" WidthRequest="25">
+                                        <Label Grid.Column="0" HorizontalOptions="Center" TextColor="Black" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" Text="{Binding number}" Margin="0"/>
+                                    </Frame>
+                                    <Label Grid.Column="1" HorizontalOptions="Center" TextColor="Black" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" Text="{Binding par}" Margin="0"/>
+                                    <Label Grid.Column="2" HorizontalOptions="Center" TextColor="Black" FontSize="16" FontAttributes="Bold" VerticalOptions="Center" Text="{Binding putt}" Margin="0"/>
+                                    <Label Grid.Column="3" HorizontalOptions="Center" TextColor="Black" FontSize="16" FontAttributes="Bold" VerticalOptions="Center" Text="{Binding penalities}" Margin="0"/>
+                                    <Frame Grid.Column="4" Margin="0, 0, 5, 0" HorizontalOptions="Center" HasShadow="False" VerticalOptions="Center" CornerRadius="{Binding firstFrameCornerRadius}" BackgroundColor="{Binding firstFrameBackgroundColor}" OutlineColor="{Binding firstFrameBorderColor}" Padding="2" WidthRequest="{Binding firstFrameWidth}">
+                                        <Frame HorizontalOptions="Center" VerticalOptions="Center" HasShadow="False" CornerRadius="{Binding secondFrameCornerRadius}" BackgroundColor="{Binding secondFrameBackgroundColor}" OutlineColor="{Binding secondFrameBorderColor}" WidthRequest="{Binding secondFrameWidth}" Padding="3">
+                                            <Label Grid.Column="4" HorizontalOptions="Center" TextColor="{Binding textColor}" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" Text="{Binding score}" Margin="0"/>
+                                        </Frame>
+                                    </Frame>
+                                </Grid>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                
+                <Grid BackgroundColor="LightGray" Grid.Row="2">
+                    <Label Grid.Column="0" TextColor="Black" FontSize="21" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" Text=" " />
+                    <Label x:Name="totalPar" Grid.Column="1" TextColor="Black" FontSize="21" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" Text="34" />
+                    <Label x:Name="totalPutt" Grid.Column="2" TextColor="Black" FontSize="17" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" Text="15" />
+                    <Label x:Name="totalPen" Grid.Column="3" TextColor="Black" FontSize="17" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" Text="2" />
+                    <Label x:Name="totalScore" Grid.Column="4" TextColor="Black" FontSize="21" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" Margin="0, 0, 5, 0" Text="38" />
+                </Grid>
+            </Grid>
+            
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

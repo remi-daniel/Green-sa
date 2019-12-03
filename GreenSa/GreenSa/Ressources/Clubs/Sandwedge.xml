@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Club>
+  <Name>Sandwedge</Name>
+  <DistanceMoyenne Index="0">90</DistanceMoyenne>
+  <DistanceMoyenne Index="10">85</DistanceMoyenne>
+  <DistanceMoyenne Index="20">75</DistanceMoyenne>
+  <DistanceMoyenne Index="30">65</DistanceMoyenne>
+  <DistanceMoyenne Index="40">55</DistanceMoyenne>
+</Club>

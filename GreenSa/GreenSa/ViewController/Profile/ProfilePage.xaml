@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GreenSa.ViewController.Profile.ProfilePage"
+             xmlns:local="clr-namespace:GreenSa.MarkupExtension"
+             xmlns:viewElements="clr-namespace:GreenSa.Models.ViewElements"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid x:Name="page">
+            <Grid.RowDefinitions>
+                <RowDefinition x:Name="haut" Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Image x:Name="logo" Source="fond_profile_page.png" Grid.Row="0"
+                    HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand"
+                    />
+            <Image x:Name="photo" Source="user1.png" Grid.Row="0"
+                    HorizontalOptions="Center" VerticalOptions="Start"
+                    />
+            <Label x:Name="user" Grid.Row="0" Text="Username" FontAttributes="Bold" VerticalOptions="End" HorizontalOptions="Center" TextColor="Black"/>
+            <ImageButton x:Name="engrenage" Source="modifier.png" BackgroundColor="Transparent"
+                       HorizontalOptions="End" VerticalOptions="Start" 
+                       Clicked="OnOptionsClicked"
+                       />
+            <ImageButton x:Name="arrow" Source="fleche.png" BackgroundColor="Transparent"
+                       HorizontalOptions="Start" VerticalOptions="Start" 
+                       Clicked="OnArrowClicked"
+                       />
+            <Grid x:Name="infos" Grid.Row="1" RowSpacing="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Row="0" x:Name="golfreftitle" Text="Golf de référence :" VerticalOptions="Start" HorizontalOptions="Center" TextColor="Gray"/>
+                <Label Grid.Row="0" x:Name="golfref" Text="Golf de Savenay" FontAttributes="Bold" VerticalOptions="End" HorizontalOptions="Center" TextColor="Black"/>
+                <Label Grid.Row="1" x:Name="indextitle" Text="Index :" VerticalOptions="Start" HorizontalOptions="Center" TextColor="Gray"/>
+                <Label Grid.Row="1" x:Name="index" Text="10.5" FontAttributes="Bold" VerticalOptions="End" HorizontalOptions="Center" TextColor="Black"/>
+                <Label Grid.Row="2" x:Name="nivtitle" Text="Niveau :" VerticalOptions="Start" HorizontalOptions="Center" TextColor="Gray"/>
+                <Label Grid.Row="2" x:Name="niv" Text="Compétition" FontAttributes="Bold" VerticalOptions="End" HorizontalOptions="Center" TextColor="Black"/>
+            </Grid>
+            <Grid x:Name="boutons" Grid.Row="2" RowSpacing="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" x:Name="r0"/>
+                    <RowDefinition Height="*" x:Name="r1"/>
+                </Grid.RowDefinitions>
+                <Grid x:Name="duo" Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" x:Name="c0"/>
+                        <ColumnDefinition Width="*" x:Name="c1"/>
+                    </Grid.ColumnDefinitions>
+                    <ImageButton x:Name="clubs" Source="clubs.png" Grid.Column="0"
+                       HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" Clicked="OnClubsClicked" BackgroundColor="Transparent"/>
+                    <Label x:Name="clubstitle" Grid.Column="0" Text="CLUBS" FontAttributes="Bold" VerticalOptions="End" HorizontalOptions="Center" TextColor="Black"/>
+                    <ImageButton x:Name="parties" Source="parties.png" Grid.Column="1"
+                       HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" Clicked="OnPartiesClicked" BackgroundColor="Transparent"/>
+                    <Label x:Name="partiestitle" Grid.Column="1" Text="PARTIES" FontAttributes="Bold" VerticalOptions="End" HorizontalOptions="Center" TextColor="Black"/>
+                </Grid>
+                <ImageButton x:Name="stats" Source="stats.png" Grid.Row="1"
+                       HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" Clicked="OnStatsClicked" BackgroundColor="Transparent"/>
+                <Label x:Name="statstitle" Grid.Row="1" Text="STATS" FontAttributes="Bold" VerticalOptions="End" HorizontalOptions="Center" TextColor="Black"/>
+
+            </Grid>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

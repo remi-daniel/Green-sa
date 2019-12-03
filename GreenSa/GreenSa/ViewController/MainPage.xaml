@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:GreenSa.MarkupExtension"
+             xmlns:viewElements="clr-namespace:GreenSa.Models.ViewElements"
+             x:Class="GreenSa.ViewController.MainPage" 
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Content>
+        <Grid x:Name="page" RowSpacing="0">
+        <Grid.RowDefinitions>
+            <RowDefinition x:Name="haut" Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Image x:Name="logo" Source="logo_main_page.png" Grid.Row="0"
+                    HorizontalOptions="CenterAndExpand"
+                    />
+        <Label x:Name="titre" Grid.Row="0" FontSize="30" Text="GREEN'SA" FontAttributes="Bold" VerticalOptions="End" HorizontalOptions="Center" TextColor="White"/>
+        <ImageButton x:Name="engrenage" Source="engre_icon.png" BackgroundColor="Transparent"
+                       HorizontalOptions="End" VerticalOptions="Start" 
+                       HeightRequest="25" Margin="10" Clicked="OnOptionsClicked"
+                       />
+        <Grid x:Name="boutons" Grid.Row="1" RowSpacing="8" Margin="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" x:Name="r0"/>
+                <RowDefinition Height="*" x:Name="r1"/>
+            </Grid.RowDefinitions>
+            <Grid x:Name="duo" Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" x:Name="c0"/>
+                    <ColumnDefinition Width="*" x:Name="c1"/>
+                </Grid.ColumnDefinitions>
+                <ImageButton x:Name="jouer" Source="play.png" Grid.Column="0"
+                       HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" Margin="5, 5, 5, 10" Clicked="OnPlayClicked" BackgroundColor="Transparent"/>
+                <Label x:Name="jouertext" FontSize="21"  Grid.Column="0" Text="JOUER" FontAttributes="Bold" VerticalOptions="End" HorizontalOptions="Center" TextColor="Black"/>
+                <ImageButton x:Name="profil" Source="profil.png" Grid.Column="1"
+                       HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" Margin="5, 5, 5, 10" Clicked="OnProfilClicked" BackgroundColor="Transparent"/>
+                <Label x:Name="profiltext" FontSize="21"  Grid.Column="1" Text="PROFIL" FontAttributes="Bold" VerticalOptions="End" HorizontalOptions="Center" TextColor="Black"/>
+            </Grid>
+            <ImageButton x:Name="mesgolfs" Source="golfs.png" Grid.Row="1"
+                       HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand" Margin="5, 5, 5, 10" Clicked="OnGolfClicked" BackgroundColor="Transparent"/>
+            <Label x:Name="mesgolfstext" FontSize="21"  Grid.Row="1" Text="MES GOLFS" FontAttributes="Bold" VerticalOptions="End" HorizontalOptions="Center" TextColor="Black"/>
+            
+        </Grid>
+    </Grid>
+    </ContentPage.Content>
+</ContentPage>

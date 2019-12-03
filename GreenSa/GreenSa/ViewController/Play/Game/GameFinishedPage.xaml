@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GreenSa.ViewController.Play.Game.GameFinishedPage"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid x:Name="page">
+            <Grid.RowDefinitions>
+                <RowDefinition x:Name="haut" Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="2*"/>
+            </Grid.RowDefinitions>
+            <Image x:Name="logo" Source="fond_profile_page.png" Grid.Row="0"
+                    HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand"
+                    />
+            <Image x:Name="coupe" Source="cup.png" Grid.Row="0"
+                    HorizontalOptions="Center" VerticalOptions="Start"
+                    />
+            <Label x:Name="title" Grid.Row="1" Text="Partie Terminée !" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Center" TextColor="Black"
+                   FontSize="30"/>
+
+            <Label x:Name="numero" Text="9 trous :" Grid.Row="2" VerticalOptions="Start" HorizontalOptions="Start" FontAttributes="Bold"
+                   TextColor="Black" FontSize="30"/>
+            <Label x:Name="par" Text="4" Grid.Row="2" VerticalOptions="Start" HorizontalOptions="Start" FontAttributes="Bold"
+                   TextColor="Black" FontSize="40"/>
+            <Label x:Name="score" Text="  " Grid.Row="2" VerticalOptions="Start" HorizontalOptions="Start" FontAttributes="Bold"
+                   TextColor="Black" FontSize="40"/>
+            <Label x:Name="parlegende" Text="Par" Grid.Row="2" VerticalOptions="Start" HorizontalOptions="Start" FontAttributes="Bold"
+                   TextColor="Gray" FontSize="20"/>
+            <Label x:Name="scorelegende" Text="Score" Grid.Row="2" VerticalOptions="Start" HorizontalOptions="Start" FontAttributes="Bold"
+                   TextColor="Gray" FontSize="20"/>
+
+            <Button x:Name="check" Text="Voir la carte complète" Grid.Row="3" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold"
+                   TextColor="White" FontSize="18" BackgroundColor="#39B54A" CornerRadius="30" Clicked="OnCardClicked"/>
+
+            <Button x:Name="menu" Text="Retour au menu" Grid.Row="4" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold"
+                   TextColor="White" FontSize="18" BackgroundColor="Gray" CornerRadius="30" Clicked="OnGoBackClicked"/>  
+            
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,0 +1,29 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreenSa.iOS", "GreenSa.iOS.csproj", "{33033569-A678-4D13-BF46-6DF17C1FB5E9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|iPhoneSimulator = Debug|iPhoneSimulator
+		Release|iPhoneSimulator = Release|iPhoneSimulator
+		Debug|iPhone = Debug|iPhone
+		Release|iPhone = Release|iPhone
+		Ad-Hoc|iPhone = Ad-Hoc|iPhone
+		AppStore|iPhone = AppStore|iPhone
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{33033569-A678-4D13-BF46-6DF17C1FB5E9}.Debug|iPhoneSimulator.ActiveCfg = Debug|iPhoneSimulator
+		{33033569-A678-4D13-BF46-6DF17C1FB5E9}.Debug|iPhoneSimulator.Build.0 = Debug|iPhoneSimulator
+		{33033569-A678-4D13-BF46-6DF17C1FB5E9}.Release|iPhoneSimulator.ActiveCfg = Release|iPhoneSimulator
+		{33033569-A678-4D13-BF46-6DF17C1FB5E9}.Release|iPhoneSimulator.Build.0 = Release|iPhoneSimulator
+		{33033569-A678-4D13-BF46-6DF17C1FB5E9}.Debug|iPhone.ActiveCfg = Debug|iPhone
+		{33033569-A678-4D13-BF46-6DF17C1FB5E9}.Debug|iPhone.Build.0 = Debug|iPhone
+		{33033569-A678-4D13-BF46-6DF17C1FB5E9}.Release|iPhone.ActiveCfg = Release|iPhone
+		{33033569-A678-4D13-BF46-6DF17C1FB5E9}.Release|iPhone.Build.0 = Release|iPhone
+		{33033569-A678-4D13-BF46-6DF17C1FB5E9}.Ad-Hoc|iPhone.ActiveCfg = Ad-Hoc|iPhone
+		{33033569-A678-4D13-BF46-6DF17C1FB5E9}.Ad-Hoc|iPhone.Build.0 = Ad-Hoc|iPhone
+		{33033569-A678-4D13-BF46-6DF17C1FB5E9}.AppStore|iPhone.ActiveCfg = AppStore|iPhone
+		{33033569-A678-4D13-BF46-6DF17C1FB5E9}.AppStore|iPhone.Build.0 = AppStore|iPhone
+	EndGlobalSection
+EndGlobal

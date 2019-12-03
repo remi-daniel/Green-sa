@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<GolfCourse>
+  <Name>18 trous Saint Jacques</Name>
+  <NbTrous>18</NbTrous>
+  <NomGolf>Saint Jacques</NomGolf>
+  <Coordinates>
+    <Trou>
+      <par>5</par>
+      <lat>48,067001</lat>
+      <lng>-1,741196</lng>
+    </Trou>
+    <Trou>
+      <par>4</par>
+      <lat> 48,06511045391539</lat>
+      <lng>-1,7384228110313416</lng>
+    </Trou>
+    <Trou>
+      <par>4</par>    
+      <lat>48,06191124481533</lat>
+      <lng>-1,7402896285057068</lng>
+    </Trou>
+    <Trou>
+      <par>3</par>
+      <lat>48,06191682208731</lat>
+      <lng>-1,7423482239246368</lng>
+    </Trou>
+    <Trou>
+      <par>5</par>      
+      <lat>48,064552761422526</lat>
+      <lng>-1,7475530505180359</lng>
+    </Trou>
+    <Trou>
+      <par>4</par>
+      <lat>48,06192696256268</lat>
+      <lng>-1,745017021894455</lng>
+    </Trou>
+    <Trou>
+      <par>4</par>
+      <lat>48,06523415940042</lat>
+      <lng>-1,7449117451906204</lng>
+    </Trou>
+    <Trou>
+      <par>4</par>
+      <lat>48,06514594323316</lat>
+      <lng>-1,7483684420585632</lng>
+    </Trou>
+    <Trou>
+      <par>3</par>
+      <lat>48,067265118137264</lat>
+      <lng>-1,7493769526481628</lng>
+    </Trou>
+    <Trou>
+      <par>4</par>
+      <lat>48,06686968056081</lat>
+      <lng>-1,7427840828895569</lng>
+    </Trou>
+    <Trou>
+      <par>3</par>
+      <lat> 48,06626130932234</lat>
+      <lng>-1,7406007647514343</lng>
+    </Trou>
+    <Trou>
+      <par>4</par>
+      <lat>48,062286439683504</lat>
+      <lng>-1,7416200041770935</lng>
+    </Trou>
+    
+    
+    
+    <Trou>
+      <par>4</par>
+      <lat>48,06523213147448</lat>
+      <lng>-1,7402628064155579</lng>
+    </Trou>
+    
+    <Trou>
+      <par>4</par>
+      <lat>48,061439712251634</lat>
+      <lng>-1,7438247799873352</lng>
+    </Trou>
+    <Trou>
+      <par>5</par>
+      <lat>48,06404119994884</lat>
+      <lng>-1,7446012794971466</lng>
+    </Trou>
+    <Trou>
+      <par>4</par>
+      <lat>48,065678280295536</lat>
+      <lng>-1,7409548163414001</lng>
+    </Trou>
+    <Trou>
+      <par>3</par>
+      <lat>48,06590642296597</lat>
+      <lng>-1,7435082793235779</lng>
+    </Trou>
+    <Trou>
+      <par>5</par>
+      <lat>48,06719971917654</lat>
+      <lng>-1,7486514151096344</lng>
+    </Trou>
+  </Coordinates>
+</GolfCourse>

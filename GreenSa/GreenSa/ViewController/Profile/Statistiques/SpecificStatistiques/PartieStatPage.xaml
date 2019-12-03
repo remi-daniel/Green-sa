@@ -1,0 +1,107 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewelements="clr-namespace:GreenSa.Models.ViewElements"
+             xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             x:Class="GreenSa.ViewController.Profile.Statistiques.StatistiquesGolfCourse.PartieStatPage"
+             NavigationPage.HasNavigationBar="False">
+
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical" BackgroundColor="#E9F8EA">
+            <Label x:Name="partieDate" TextColor="#0A7210" FontAttributes="Bold" FontSize="Large" HorizontalOptions="Center" Margin="0, 10, 0, 0">Partie du 07/04/19 sur le</Label>
+            <Label x:Name="golfCourseName" TextColor="#0A7210" FontAttributes="Bold" FontSize="Large" HorizontalOptions="Center" Margin="0, -15, 0, 0">9 trous de Savenay</Label>
+
+            <Grid Margin="0, 10, 0, 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="88*" />
+                    <ColumnDefinition Width="12*" />
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold" TextColor="Black" FontSize="19" Margin="18, 0, 0, 0">Répartition des coups :</Label>
+                <Button x:Name="legendButton" Grid.Row="0" Grid.Column="1" Margin="0, 0, 15, 0" HeightRequest="15" WidthRequest="15" Clicked="onLegendClick" Padding="2" FontAttributes="Bold" TextColor="DarkRed" FontSize="15" Text="?" />
+            </Grid>
+
+            <Frame Grid.Row="0" Grid.Column="0" HeightRequest="180" Grid.ColumnSpan="2" HorizontalOptions="Fill" Margin="10, 5, 10, 0" VerticalOptions="Fill" CornerRadius="4" OutlineColor="DarkSlateGray" Padding="5">
+                <microcharts:ChartView x:Name="chartView" VerticalOptions="Fill" HorizontalOptions="Fill"/>
+            </Frame>
+
+            <Grid x:Name="bottomStats" Margin="0, 5, 0, 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="38*" />
+                    <ColumnDefinition Width="62*" />
+                </Grid.ColumnDefinitions>
+
+                <Frame x:Name="averagePuttFrame" Grid.Row="0" Grid.Column="0" Margin="0, 20, 0, 0" HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="4" OutlineColor="DarkSlateGray" Padding="7">
+                    <StackLayout>
+                        <Label x:Name="averagePutt" HorizontalOptions="Fill" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" BackgroundColor="White" FontFamily="Times New Roman" TextColor="#39B54A" Text="2.5" FontSize="30" />
+                    </StackLayout>
+                </Frame>
+                <Label x:Name="averagePuttLabel" Margin="0, 20, 12, 0" VerticalOptions="Center" FontAttributes="Bold" TextColor="Black" FontSize="17" Grid.Row="0" Grid.Column="1">Nombre de putts moyen / trou</Label>
+
+                <Frame x:Name="notableScore1Frame" Grid.Row="1" Grid.Column="0" Margin="0, 8, 0, 0" HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="4" OutlineColor="DarkSlateGray" Padding="9, 4, 9, 4">
+                    <StackLayout>
+                        <Label x:Name="notableScore1" HorizontalOptions="Fill" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" BackgroundColor="White" FontFamily="Times New Roman" TextColor="#39B54A" Text="2" FontSize="30" />
+                    </StackLayout>
+                </Frame>
+                <Label x:Name="notableScore1Label" VerticalOptions="Center" Margin="0, 8, 12, 0" FontSize="17" FontAttributes="Bold" TextColor="Black" Grid.Row="1" Grid.Column="1">Score remarquable</Label>
+
+                <Frame x:Name="notableScore2Frame" Grid.Row="2" Grid.Column="0" Margin="0, 8, 0, 0" HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="4" OutlineColor="DarkSlateGray" Padding="9, 4, 9, 4">
+                    <StackLayout>
+                        <Label x:Name="notableScore2" HorizontalOptions="Fill" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" VerticalOptions="Center" BackgroundColor="White" FontFamily="Times New Roman" TextColor="#39B54A" Text="1" FontSize="30" />
+                    </StackLayout>
+                </Frame>
+                <Label x:Name="notableScore2Label" VerticalOptions="Center" Margin="0, 8, 12, 0" FontSize="17" FontAttributes="Bold" TextColor="Black" Grid.Row="2" Grid.Column="1">Score remarquable</Label>
+            </Grid>
+
+
+            <Grid x:Name="legend" Margin="0, 10, 0, 0" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="3" IsVisible="False">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="30*" />
+                    <ColumnDefinition Width="70*" />
+                </Grid.ColumnDefinitions>
+
+                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Margin="15, 0, 0, 0" VerticalOptions="Center" FontAttributes="Bold" TextColor="Black" FontSize="17">Légende :</Label>
+
+                <Frame Grid.Row="1" Grid.Column="0" BackgroundColor="#0BF5A3" HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="4" OutlineColor="DarkSlateGray" Padding="7"/>
+                <Label Grid.Row="1" Grid.Column="1" VerticalOptions="Center" TextColor="DarkSlateGray" FontSize="17">Coups parfaits</Label>
+
+                <Frame Grid.Row="2" Grid.Column="0" BackgroundColor="#44F50B" HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="4" OutlineColor="DarkSlateGray" Padding="7"/>
+                <Label Grid.Row="2" Grid.Column="1" VerticalOptions="Center" TextColor="DarkSlateGray" FontSize="17">Bons coups</Label>
+
+                <Frame Grid.Row="3" Grid.Column="0" BackgroundColor="#F5A00B" HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="4" OutlineColor="DarkSlateGray" Padding="7"/>
+                <Label Grid.Row="3" Grid.Column="1" VerticalOptions="Center" TextColor="DarkSlateGray" FontSize="17">Coups acceptables</Label>
+
+                <Frame Grid.Row="4" Grid.Column="0" BackgroundColor="#F9E65E" HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="4" OutlineColor="DarkSlateGray" Padding="7"/>
+                <Label Grid.Row="4" Grid.Column="1" VerticalOptions="Center" TextColor="DarkSlateGray" FontSize="17">Longs coups innatendus</Label>
+
+                <Frame Grid.Row="5" Grid.Column="0" BackgroundColor="#F5340B" HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="4" OutlineColor="DarkSlateGray" Padding="7"/>
+                <Label Grid.Row="5" Grid.Column="1" VerticalOptions="Center" TextColor="DarkSlateGray" FontSize="17">Coups dispersés</Label>
+
+                <Frame Grid.Row="6" Grid.Column="0" BackgroundColor="#818181" HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="4" OutlineColor="DarkSlateGray" Padding="7"/>
+                <Label Grid.Row="6" Grid.Column="1" VerticalOptions="Center" TextColor="DarkSlateGray" FontSize="17">Coups ratés</Label>
+
+                <Frame Grid.Row="7" Grid.Column="0" BackgroundColor="#313030" HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="4" OutlineColor="DarkSlateGray" Padding="7"/>
+                <Label Grid.Row="7" Grid.Column="1" VerticalOptions="Center" TextColor="DarkSlateGray" FontSize="17">Coups de pénalité</Label>
+
+
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>

@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewelements="clr-namespace:GreenSa.Models.ViewElements"
+             xmlns:gps_maps="clr-namespace:GreenSa.Models.Tools.GPS_Maps"
+             xmlns:viewelements1="http://xamarin.com/schemas/2014/forms"
+             x:Class="GreenSa.ViewController.Option.ImportGolfCourse"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <StackLayout Orientation="Vertical">
+            <viewelements:MyLabel Text="Création d'un nouveau parcours" FontAttributes="Bold" FontSize="21" HorizontalOptions="Center"  Margin="0, 10, 0, 5"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <viewelements:MyLabel Text="Nom du golf :" FontSize="13" x:Name="cityLabel" Grid.ColumnSpan="2" Grid.Row="0" Grid.Column="0" Margin="10, 10, 0, 0"/>
+                <Entry Text="Golf de Savenay" x:Name="cityEntry" Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="3"/>
+                <viewelements1:Button HeightRequest="15" FontSize="11" x:Name="localizeCity" Text="Localiser" Margin="5" Grid.Row="0" Grid.Column="5" Grid.ColumnSpan="2" Clicked="OnLocalizeClick"/>
+                
+                <viewelements:MyLabel Text="Nom du parcours :" x:Name="golfNameLabel" FontSize="13" Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="0" Margin="10, 5, 0, 0"/>
+                <Entry Text="9 trous de Savenay" x:Name="golfNameEntry" MaxLength="25" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="5"/>
+
+                <viewelements:MyLabel Text="" x:Name="golfParLabel" FontSize="13" Grid.ColumnSpan="2" Grid.Row="1" Grid.Column="0" Margin="10, 5, 0, 0"/>
+                <Entry Text="4" x:Name="golfParEntry" Grid.Row="1" Grid.Column="2">
+                    <Entry.Behaviors>
+                        <viewelements:NumericValidationBehavior />
+                    </Entry.Behaviors>
+                </Entry>
+                <viewelements1:Button HeightRequest="15" FontSize="11" x:Name="validPar" Text="Valider" Margin="5" Grid.Row="1" Grid.Column="3" Grid.ColumnSpan="2" Clicked="OnValidParClick"/>
+            </Grid>
+            <gps_maps:AddGolfMap x:Name="map" MapType="Satellite" WidthRequest="960" HeightRequest="100" VerticalOptions="FillAndExpand" IsVisible="true"/>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <viewelements1:Button HeightRequest="37" Grid.Row="0" Grid.Column="0" x:Name="deletePin" FontSize="10" Text="Supprimer le dernier trou" Margin="5, 0, 5, 0" Clicked="OnDeletePinClick"/>
+                <viewelements1:Button HeightRequest="37" Grid.Row="0" Grid.Column="1" x:Name="deleteAllPins" FontSize="10" Text="Supprimer tous les trous" Margin="5, 0, 5, 0" Clicked="OnDeleteAllPinsClick"/>
+                <viewelements:MyButton Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" x:Name="validHole" Font="Large" Text="Créer le parcours" Margin="10, 5, 10, 10" Clicked="OnCreateCourseClick"/>
+            </Grid>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
