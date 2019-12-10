@@ -16,7 +16,8 @@
                 <Label x:Name="date" Grid.Row="1" HorizontalOptions="Start" VerticalOptions="Center"
                    FontSize="19" TextColor="White" Text="02/05/2019" Margin="10, 0, 0, 0"/>
             </Grid>
-            
+
+            <Button x:Name="historyButton" Grid.Row="0" Margin="0, 0, 15, 0" HeightRequest="15" WidthRequest="15" Clicked="onHistoryClick" Padding="2" FontAttributes="Bold" TextColor="DarkRed" FontSize="15" Text="Historique de la partie" />
 
             <Grid Grid.Row="1" VerticalOptions="Fill" Margin="0, -5, 0, 0">
                 <Grid.RowDefinitions>

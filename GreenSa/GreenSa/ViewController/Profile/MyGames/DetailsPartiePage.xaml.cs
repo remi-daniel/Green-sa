@@ -64,6 +64,13 @@ namespace GreenSa.ViewController.Profile.MyGames
             partie.Text = sp.GolfName + " :";
             date.Text = sp.DateString;
         }
-    
+
+        private async void onHistoryClick(object sender, EventArgs e)
+        {
+            Button b = (Button)sender;
+            //await Navigation.PushModalAsync(new Test.SeeBDContent());
+            await Navigation.PushModalAsync(new HistoryPage());
+        }
+
     }
 }
