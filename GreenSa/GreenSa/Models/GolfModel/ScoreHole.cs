@@ -9,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace GreenSa.Models.GolfModel
 {
+    /**
+    * Data structure used to store in the DB information about the score of the player of a particular hole 
+    */
     public class ScoreHole
     {
         [PrimaryKey, AutoIncrement]
@@ -22,6 +25,10 @@ namespace GreenSa.Models.GolfModel
         public bool Hit { get; set; }
         public DateTime Date { get; set; }
         public int NombrePutt{get;set ;}
+
+        //List of the shots performed while playing this hole
+        [OneToMany(CascadeOperations = CascadeOperation.All)]
+        public List<Shot> Shots { get; set; }
 
 
         [ForeignKey(typeof(ScorePartie))]
