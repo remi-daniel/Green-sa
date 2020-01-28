@@ -44,17 +44,15 @@ namespace GreenSa.Models.GolfModel
         [OneToOne(foreignKey:"RealShotId",CascadeOperations =CascadeOperation.All)]
         public MyPosition RealShot { get; set; }
 
-        //Hole that the user was playing while making this shot
-        [ForeignKey(typeof(ScoreHole))]
-        public string ScoreHoleId { get; set; }
-        [OneToOne(foreignKey: "ScoreHoleId", CascadeOperations = CascadeOperation.CascadeRead)]
-        public ScoreHole Hole { get; set; }
-
         public ShotCategory ShotType { get; set; }
 
         public int PenalityCount { get; set; }
 
         public DateTime Date { get; set; }
+
+        //Hole that the user was playing while making this shot
+        [ForeignKey(typeof(ScoreHole))]
+        public int IdScoreHole { get; set; }
 
         [Ignore]
         public string DateString

@@ -3,8 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="GreenSa.ViewController.Test.SeeBDContent">
     <ContentPage.Content>
-      
-            <ScrollView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+
+        <ScrollView VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
             <StackLayout>
                 <StackLayout Orientation="Horizontal">
                     <Button Text ="Golfcourse" Clicked="seeGolfCourse"/>
@@ -19,7 +19,7 @@
                     <Button Text ="Parties" Clicked="seeParties"/>
                 </StackLayout>
                 <Button Text ="Drop Tables" Clicked="dropAllTable" BackgroundColor="Red"/>
-
+                <Label Text="Écran de test - Visualisation de la base de données" FontAttributes="Bold" VerticalOptions="End" HorizontalOptions="Center" TextColor="Black"/>
                 <StackLayout Orientation="Horizontal">
                 </StackLayout>
                 <Label x:Name="label" Text="Contenu"
