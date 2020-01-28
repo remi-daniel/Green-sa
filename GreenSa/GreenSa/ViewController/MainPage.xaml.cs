@@ -88,9 +88,8 @@ namespace GreenSa.ViewController
         }
 
 
-        async private void OnOptionsClicked(object sender, EventArgs e){
-            //await Navigation.PushAsync(new OptionPage());
-            await Navigation.PushAsync(new SeeBDContent());
+        async private void OnOptionsClicked(object sender, EventArgs e){ 
+            await Navigation.PushAsync(new OptionPage());
         }
     }
 }
