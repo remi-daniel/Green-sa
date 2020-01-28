@@ -414,7 +414,7 @@ namespace GreenSa.ViewController.Play.Game
         }
 
         /**
-         * This method is used when the position of the user is being loading
+         * This method is used when the position of the user is being loaded
          * Shows the load icon and hides the other ones (no little button when localizing)
          */
         private void showLoad()
@@ -430,7 +430,7 @@ namespace GreenSa.ViewController.Play.Game
         }
 
         /**
-         * This method is used when the user is ready to chose a target and to shot
+         * This method is used when the user is ready to chose a target and to shoot
          * Shows the ball icon and hides the other ones (relocalize little button is shown)
          */
         private void showBall()
@@ -491,12 +491,12 @@ namespace GreenSa.ViewController.Play.Game
         {
             switch (state)
             {
-                case 0://ready to shot
+                case 0://player is ready to shoot (the user is at the "initial" position)
                     showRadar();
                     map.lockTarget();
                     break;
 
-                case 1://ready to localize
+                case 1://ready to localize the ball (the ball has landed and the player is at the "final" position)
                     MyPosition newUserPosition = await localize();
                     MyPosition start = map.getUserPosition();
                     partie.addPositionForCurrentHole(start, new MyPosition(map.TargetPin.Position.Latitude, map.TargetPin.Position.Longitude), newUserPosition);
@@ -504,11 +504,11 @@ namespace GreenSa.ViewController.Play.Game
                     map.setUserPosition(newUserPosition, partie.Shots.Count);
                     map.setTargetMovable();
                     updateDistance();
-                    showBall();
+                    showBall();//state returns to 0
                     break;
 
-                default://the user is ready to shot by default
-                    showBall();
+                default://the user is ready to shoot by default
+                    showBall();//state returns to 0
                     break;
             }
         }

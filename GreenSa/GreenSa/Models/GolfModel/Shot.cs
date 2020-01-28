@@ -26,12 +26,12 @@ namespace GreenSa.Models.GolfModel
 
         [ForeignKey(foreignType: typeof(Club))]
         public String ClubId { get; set; }
-        [OneToOne(CascadeOperations=CascadeOperation.CascadeRead)]
+        [OneToOne(CascadeOperations=CascadeOperation.CascadeRead)]//Deleting the Shot should NOT delete the associated club -> CascadeRead
         public Club Club { get; set; }
 
         [ForeignKey(typeof(MyPosition))]
         public string InitPlaceId { get; set; }
-        [OneToOne(foreignKey: "InitPlaceId", CascadeOperations = CascadeOperation.All)]
+        [OneToOne(foreignKey: "InitPlaceId", CascadeOperations = CascadeOperation.All)]//Deleting the Shot should delete the associated GPS positions -> CascadeAll
         public MyPosition InitPlace { get; set; }
 
         [ForeignKey(typeof(MyPosition))]
@@ -49,6 +49,10 @@ namespace GreenSa.Models.GolfModel
         public int PenalityCount { get; set; }
 
         public DateTime Date { get; set; }
+
+        //Hole that the user was playing while making this shot
+        [ForeignKey(typeof(ScoreHole))]
+        public int IdScoreHole { get; set; }
 
         [Ignore]
         public string DateString

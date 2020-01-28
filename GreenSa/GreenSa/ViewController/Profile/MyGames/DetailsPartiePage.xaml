@@ -35,6 +35,8 @@
                         <DataTemplate>
                             <ViewCell>
                                 <Grid>
+                                    <!-- Button used to display detailed information about the chosen hole -->
+                                    <Button BackgroundColor="White" Grid.ColumnSpan="5" Clicked="onHistoryClick" CommandParameter="{Binding}"/>
                                     <Frame Grid.Column="0" HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="3" BackgroundColor="LightGreen" OutlineColor="DarkGreen" Padding="5" WidthRequest="25">
                                         <Label Grid.Column="0" HorizontalOptions="Center" TextColor="Black" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" Text="{Binding number}" Margin="0"/>
                                     </Frame>

@@ -322,7 +322,7 @@ namespace GreenSa.Models.GolfModel
          */
         public static ScoreHole saveForStats(Partie game, Hole hole, bool save)
         {
-            ScoreHole h = new ScoreHole(hole, game.getPenalityCount(), game.getCurrentScore(), isHit(game.Shots, hole.Par), nbCoupPutt(game.Shots),DateTime.Now);
+            ScoreHole h = new ScoreHole(hole, game.getPenalityCount(), game.getCurrentScore(), isHit(game.Shots, hole.Par), nbCoupPutt(game.Shots),DateTime.Now,game.Shots);
             if (save)
             {
                 if (game.Shots.Count == 0)
@@ -332,11 +332,13 @@ namespace GreenSa.Models.GolfModel
                 connection.CreateTable<MyPosition>();
                 connection.CreateTable<Shot>();
                 //first let's insert in the database all the shots currently stored in the game
-                SQLiteNetExtensions.Extensions.WriteOperations.InsertOrReplaceAllWithChildren(connection, game.Shots, true);
+                //SQLiteNetExtensions.Extensions.WriteOperations.InsertOrReplaceAllWithChildren(connection, game.Shots, true);
                 connection.CreateTable<ScoreHole>();
 
                 //then creates a ScoreHole object that stores the hole statistics and insert it in the database
-                SQLiteNetExtensions.Extensions.WriteOperations.InsertWithChildren(connection, h, false);
+                //SQLiteNetExtensions.Extensions.WriteOperations.InsertWithChildren(connection, h, false); OLD
+                //SQLiteNetExtensions.Extensions.WriteOperations.InsertWithChildren(connection, h, true); RECUSRSIF=true, parvient à insérer 1 shot
+                SQLiteNetExtensions.Extensions.WriteOperations.InsertOrReplaceWithChildren(connection, h, true);//InsertOrReplace, fonctionnel?
                 string sql = @"select last_insert_rowid()";
                 h.Id = connection.ExecuteScalar<int>(sql);
             }
