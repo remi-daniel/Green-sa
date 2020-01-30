@@ -71,8 +71,8 @@
     <Compile Include="Models\GolfModel\GolfCourse.cs" />
     <Compile Include="Models\Tools\Partie.cs" />
     <Compile Include="Models\Exceptions\EmptyStringException.cs" />
-    <Compile Include="ViewController\MainPageTest.xaml.cs">
-      <DependentUpon>MainPageTest.xaml</DependentUpon>
+    <Compile Include="ViewController\Test\MapsTestPage.xaml.cs">
+      <DependentUpon>MapsTestPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewController\MesGolfs\GolfsManager.xaml.cs">
       <DependentUpon>GolfsManager.xaml</DependentUpon>
@@ -378,7 +378,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ViewController\MainPageTest.xaml">
+    <EmbeddedResource Include="ViewController\Test\MapsTestPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

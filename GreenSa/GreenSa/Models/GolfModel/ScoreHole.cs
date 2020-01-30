@@ -27,9 +27,9 @@ namespace GreenSa.Models.GolfModel
         public int NombrePutt{get;set ;}
 
         //List of the shots performed while playing this hole
-        [OneToMany(CascadeOperations = CascadeOperation.All)]
+        //[OneToMany(CascadeOperations = CascadeOperation.All)] A confirmer!
+        [OneToMany(CascadeOperations = CascadeOperation.CascadeRead)]
         public List<Shot> Shots { get; set; }
-
 
         [ForeignKey(typeof(ScorePartie))]
         public int idScorePartie { get; set; }
@@ -58,7 +58,10 @@ namespace GreenSa.Models.GolfModel
             this.Penality = penality;
             Date = date;
             NombrePutt = nbPutt;
-            this.Shots = shots;
+            //Fix: on clone la liste Shots de la Partie car elle sera réutilisée à chaque trou, et puisqu'à la fin de partie on réinsère les ScoreHole
+            //avec le ScorePartie, le ShotHole est mis à jour et la valeur de this.Shots vaudrait à cet instant la même chose chez tous les ScoreHole -> bug
+            List<Shot> copy = new List<Shot>(shots);
+            this.Shots = copy;
         }
 
         public override string ToString()

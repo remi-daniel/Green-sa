@@ -68,7 +68,6 @@ namespace GreenSa.ViewController.Profile.MyGames
         private async void onHistoryClick(object sender, EventArgs e)
         {
             Button b = (Button)sender;
-            //await Navigation.PushModalAsync(new Test.SeeBDContent());
             await Navigation.PushModalAsync(new HistoryPage());
         }
 
