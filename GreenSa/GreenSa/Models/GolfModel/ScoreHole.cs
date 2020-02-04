@@ -29,6 +29,7 @@ namespace GreenSa.Models.GolfModel
         //List of the shots performed while playing this hole
         //[OneToMany(CascadeOperations = CascadeOperation.All)] A confirmer!
         [OneToMany(CascadeOperations = CascadeOperation.CascadeRead)]
+        //[OneToMany(CascadeOperations = CascadeOperation.All)]
         public List<Shot> Shots { get; set; }
 
         [ForeignKey(typeof(ScorePartie))]

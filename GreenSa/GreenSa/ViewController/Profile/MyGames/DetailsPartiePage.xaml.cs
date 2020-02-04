@@ -9,10 +9,11 @@ namespace GreenSa.ViewController.Profile.MyGames
 {
     public partial class DetailsPartiePage : ContentPage
     {
-        
+        ScorePartie sp;
         public DetailsPartiePage(ScorePartie sp)
         {
             InitializeComponent();
+            this.sp = sp;
             List<DisplayScoreCard> list = new List<DisplayScoreCard>();
             int i = 1;
             int totPar = 0;
@@ -28,6 +29,7 @@ namespace GreenSa.ViewController.Profile.MyGames
                 totPutt += sh.NombrePutt;
                 totPen += sh.Penality;
                 totScore += (sh.Score + sh.Hole.Par);
+                
             }
             listScore.ItemsSource = list;
 
@@ -68,7 +70,9 @@ namespace GreenSa.ViewController.Profile.MyGames
         private async void onHistoryClick(object sender, EventArgs e)
         {
             Button b = (Button)sender;
-            await Navigation.PushModalAsync(new HistoryPage());
+            DisplayScoreCard displayCard = (DisplayScoreCard)b.CommandParameter;
+            ScoreHole sh = sp.scoreHoles[displayCard.scoreHoleId-1];//ScoreHoles have Ids from 1 to n, and are sorted in the list from 0 to n-1
+            await Navigation.PushModalAsync(new HistoryPage(sh));
         }
 
     }
