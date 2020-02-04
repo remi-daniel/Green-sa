@@ -354,8 +354,11 @@ namespace GreenSa.Models.GolfModel
             SQLite.SQLiteAsyncConnection connection = DependencyService.Get<ISQLiteDb>().GetConnectionAsync();
             await connection.CreateTableAsync<ScoreHole>();
             await connection.CreateTableAsync<ScorePartie>();
+            await connection.CreateTableAsync<Club>();
+            await connection.CreateTableAsync<MyPosition>();
+            await connection.CreateTableAsync<Shot>();
 
-            await SQLiteNetExtensionsAsync.Extensions.WriteOperations.InsertOrReplaceWithChildrenAsync(connection, scoreOfThisPartie,false);
+            await SQLiteNetExtensionsAsync.Extensions.WriteOperations.InsertOrReplaceWithChildrenAsync(connection, scoreOfThisPartie,true);
         }
 
         /**

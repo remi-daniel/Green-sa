@@ -67,5 +67,80 @@ namespace GreenSa.ViewController.Profile.MyGames
             }
             return clubs;
         }
+
+
+
+
+        //---------------------------------------
+
+
+
+
+
+
+        /**
+         * Updates the score label text
+         */
+        private void updateScoreText()
+        {
+            
+        }
+
+        /**
+         * This method is called when clicking on the button to valid the current hole and go through the the next one
+         */
+        private async void validButtonClicked(object sender, EventArgs e)
+        {
+            
+        }
+
+        /**
+         * This method is called when clicking the button to end the game
+         * The current holes is saved before ending the game
+         */
+        private async void stopPartieClicked(object sender, EventArgs e)
+        {
+            
+
+        }
+
+        /**
+         * This method is called when a penality count is chosen
+         */
+        private void OnPenalityCompleted(object sender, EventArgs e)
+        {
+            
+        }
+
+        /**
+         * This method is called when clicking on the cross to delete the associated shot
+         */
+        private async void OnShotDeletedClicked(object sender, EventArgs e)
+        {
+            
+        }
+
+        /**
+         * This method is called when clicking on a new club for one shot
+         */
+        private void OnClubChanged(object sender, EventArgs e)
+        {
+            
+        }
+
+        /**
+         * This method is called when the button to add a putter shot is clicked
+         */
+        private void AddShotButtonClicked(object sender, EventArgs e)
+        {
+           
+        }
+
+
+        protected override bool OnBackButtonPressed()
+        {
+            
+            return base.OnBackButtonPressed();
+        }
     }
 }
