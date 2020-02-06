@@ -10,13 +10,18 @@ namespace GreenSa.ViewController.Profile.MyGames
 {
     public partial class HistoryPage : ContentPage
     {
-        ScoreHole sh;
-        ObservableCollection<Tuple<Shot, IEnumerable<Club>>> item;
+        private ScorePartie Sp;
+        private ScoreHole Sh;
+        private int HoleNumber;//The position of this hole in the golf course
+        private ObservableCollection<Tuple<Shot, IEnumerable<Club>>> item;
 
-        public HistoryPage(ScoreHole sh)
+        public HistoryPage(ScorePartie sp, int holeNumber)
         {
             InitializeComponent();
-            this.sh = sh;
+            HoleNumber = holeNumber;
+            Sp = sp;
+            Sh = sp.scoreHoles[holeNumber];
+            HoleNumber = holeNumber;
 
             hole_finished.Margin = new Thickness(-8, MainPage.responsiveDesign(19), 0, MainPage.responsiveDesign(20));
             ListShotPartie.Margin = new Thickness(MainPage.responsiveDesign(10), MainPage.responsiveDesign(34), MainPage.responsiveDesign(10), MainPage.responsiveDesign(58));
@@ -38,44 +43,14 @@ namespace GreenSa.ViewController.Profile.MyGames
         protected async override void OnAppearing()
         {
             base.OnAppearing();
-            //List<Club> clubs = buildClubList();
             List <Club> clubs = await GestionGolfs.getListClubsAsync(null);
-            item = new ObservableCollection<Tuple<Shot, IEnumerable<Club>>>(sh.Shots.Select(s => new Tuple<Shot, IEnumerable<Club>>(s, clubs)));
+            item = new ObservableCollection<Tuple<Shot, IEnumerable<Club>>>(Sh.Shots.Select(s => new Tuple<Shot, IEnumerable<Club>>(s, clubs)));
             ListShotPartie.ItemsSource = item;
-            numero.Text = "LAALLALALALA";
-            /*numero.Text = "Trou n°" + partie.getCurrentHoleNumero() + " :";
-            hole_finished.Text = "TROU N°" + partie.getCurrentHoleNumero() + " TERMINE !";
-            par.Text = partie.getNextHole().Par.ToString();
+            numero.Text = "Trou n°" + (HoleNumber+1) + " :";
+            hole_finished.Text = "TROU N°" + (HoleNumber+1);
+            par.Text = Sh.Hole.Par.ToString();
             updateScoreText();
-            if (!partie.hasNextHole())
-            {
-                next.Text = "Fin de partie";
-            }*/
         }
-
-        /**
-         * Generates a list of all clubs used during the hole.
-         * Because the club database could be modified later and become incompatible, it is
-         * safer to directly import them from the game data.
-         */
-        private List<Club> buildClubList()
-        {
-            //Move to game level/useless
-            List<Club> clubs = new List<Club>();
-            foreach(Shot s in sh.Shots){
-                if(!clubs.Contains(s.Club)) clubs.Add(s.Club);
-            }
-            return clubs;
-        }
-
-
-
-
-        //---------------------------------------
-
-
-
-
 
 
         /**
@@ -83,25 +58,40 @@ namespace GreenSa.ViewController.Profile.MyGames
          */
         private void updateScoreText()
         {
-            
+            int totalScore = (Sh.Score + Sh.Hole.Par);
+            if (totalScore >= 0)
+            {
+                score.Text = "+" + totalScore;
+            }
+            else
+            {
+                score.Text = totalScore.ToString();
+            }
+
+        }
+
+
+        //---------------------------------------
+
+
+
+        /**
+         * This method is called when clicking on the button to see the results of the next hole
+         */
+        private async void nextHoleClicked(object sender, EventArgs e)
+        {
+            //ARRAYINDEXINVALID
+            //Couleur du bouton en fonction (vert pour les 2 si oui, gris sinon -> plutôt non affiché)
+
+            //await Navigation.PushModalAsync(new HistoryPage(Sp, HoleNumber+1));
         }
 
         /**
-         * This method is called when clicking on the button to valid the current hole and go through the the next one
+         * This method is called when clicking on the button to see the results of the previous hole
          */
-        private async void validButtonClicked(object sender, EventArgs e)
+        private async void previousHoleClicked(object sender, EventArgs e)
         {
-            
-        }
-
-        /**
-         * This method is called when clicking the button to end the game
-         * The current holes is saved before ending the game
-         */
-        private async void stopPartieClicked(object sender, EventArgs e)
-        {
-            
-
+            //await Navigation.PushModalAsync(new HistoryPage(Sp, HoleNumber-1));
         }
 
         /**
@@ -136,11 +126,18 @@ namespace GreenSa.ViewController.Profile.MyGames
            
         }
 
-
         protected override bool OnBackButtonPressed()
         {
             
             return base.OnBackButtonPressed();
+        }
+
+        /**
+         * Syncs the changes made to the database
+         */
+        private async void saveChanges()
+        {
+            
         }
     }
 }

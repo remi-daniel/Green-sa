@@ -123,7 +123,7 @@ namespace GreenSa.Models.GolfModel
             ScoreHole sh = StatistiquesGolf.saveForStats(this, itHole.Current, false);
             ScoreOfThisPartie.add(sh);
             ScoreOfThisPartie.DateFin = DateTime.Now;
-            await StatistiquesGolf.saveGameForStats(ScoreOfThisPartie);
+            await StatistiquesGolf.saveGameForStats(ScoreOfThisPartie,saveForStatistics);
             Shots.Clear();
         }
 
@@ -136,7 +136,7 @@ namespace GreenSa.Models.GolfModel
             if (saveForStatistics)
             {
                 ScoreOfThisPartie.DateFin = DateTime.Now;
-                await StatistiquesGolf.saveGameForStats(ScoreOfThisPartie);
+                await StatistiquesGolf.saveGameForStats(ScoreOfThisPartie, saveForStatistics);
             }
         }
 

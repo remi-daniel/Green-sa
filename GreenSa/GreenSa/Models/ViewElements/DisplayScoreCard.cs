@@ -14,7 +14,6 @@ namespace GreenSa.Models.GolfModel
         public string putt { get; set; }
         public string penalities { get; set; }
         public string score { get; set; }
-        public int scoreHoleId { get; set; }
 
         public int firstFrameCornerRadius { get; set; }
         public Color firstFrameBackgroundColor { get; set; }
@@ -35,7 +34,6 @@ namespace GreenSa.Models.GolfModel
             score = (sh.Score + sh.Hole.Par).ToString();
             this.setScoreSymbol(sh.Score, sh.Hole.Par);
             secondFrameWidth = firstFrameWidth - 2;
-            scoreHoleId = sh.Id;
         }
 
         private void setScoreSymbol(int score, int par)

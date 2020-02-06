@@ -67,12 +67,15 @@ namespace GreenSa.ViewController.Profile.MyGames
             date.Text = sp.DateString;
         }
 
+        /**
+         * This method is called when a hole is selected in the list and displays its game history
+         */
         private async void onHistoryClick(object sender, EventArgs e)
         {
             Button b = (Button)sender;
             DisplayScoreCard displayCard = (DisplayScoreCard)b.CommandParameter;
-            ScoreHole sh = sp.scoreHoles[displayCard.scoreHoleId-1];//ScoreHoles have Ids from 1 to n, and are sorted in the list from 0 to n-1
-            await Navigation.PushModalAsync(new HistoryPage(sh));
+            int scoreHolePosition = int.Parse(displayCard.number) - 1;//The holes have numbers from 1 to n, and are sorted in the list from 0 to n-1
+            await Navigation.PushModalAsync(new HistoryPage(sp,scoreHolePosition));
         }
 
     }

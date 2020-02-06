@@ -50,7 +50,9 @@ namespace GreenSa.Models.GolfModel
             NombrePutt = nbPutt;
         }
 
-        //New constructor allowing for the addition of the shots in the data structure (see if old one still necessary)
+        /**
+         * New constructor allowing for the addition of the shots in the data structure (see if old one still necessary)
+         */
         public ScoreHole(Hole hole, int penality, int score, bool hit, int nbPutt, DateTime date, List<Shot> shots)
         {
             this.Hole = hole;
