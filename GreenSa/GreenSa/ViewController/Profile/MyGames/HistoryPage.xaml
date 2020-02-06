@@ -58,12 +58,12 @@
                 </ListView.ItemTemplate>
             </ListView>
 
-            <Button x:Name="add" Text="Ajouter un coup de putter" Grid.Row="1" VerticalOptions="End" HorizontalOptions="Center" FontAttributes="Bold"
+            <Button x:Name="add" Text="Ajouter un coup" Grid.Row="1" VerticalOptions="End" HorizontalOptions="Center" FontAttributes="Bold"
                    TextColor="White" FontSize="18" BackgroundColor="Gray" CornerRadius="30" />
 
-            <Label x:Name="numero" Text="Trou n°1 :" Grid.Row="2" VerticalOptions="Start" HorizontalOptions="Start" FontAttributes="Bold"
+            <Label x:Name="numero" Text="Trou n°X :" Grid.Row="2" VerticalOptions="Start" HorizontalOptions="Start" FontAttributes="Bold"
                    TextColor="Black" FontSize="30"/>
-            <Label x:Name="par" Text="4" Grid.Row="2" VerticalOptions="Start" HorizontalOptions="Start" FontAttributes="Bold"
+            <Label x:Name="par" Text="?" Grid.Row="2" VerticalOptions="Start" HorizontalOptions="Start" FontAttributes="Bold"
                    TextColor="Black" FontSize="40"/>
             <Label x:Name="score" Text="  " Grid.Row="2" VerticalOptions="Start" HorizontalOptions="Start" FontAttributes="Bold"
                    TextColor="Black" FontSize="40"/>
@@ -76,10 +76,10 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="stop"  Margin="0, 0, 0, 5" Text="Arreter partie" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold"
-                   TextColor="White" FontSize="17" BackgroundColor="Gray" CornerRadius="30"/>
+                <Button x:Name="stop"  Margin="0, 0, 0, 5" Text="Trou précédent" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold"
+                   TextColor="White" FontSize="17" BackgroundColor="Gray" CornerRadius="30" Clicked="previousHoleClicked"/>
                 <Button x:Name="next" Margin="0, 0, 0, 5" Text="Trou suivant" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold"
-                   TextColor="White" FontSize="17" CornerRadius="30" />
+                   TextColor="White" FontSize="17" CornerRadius="30" Clicked="nextHoleClicked"/>
             </Grid>
         </Grid>
     </ContentPage.Content>
