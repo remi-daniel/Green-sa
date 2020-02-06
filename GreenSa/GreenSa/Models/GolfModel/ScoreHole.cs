@@ -28,7 +28,8 @@ namespace GreenSa.Models.GolfModel
 
         //List of the shots performed while playing this hole
         //[OneToMany(CascadeOperations = CascadeOperation.All)] A confirmer!
-        [OneToMany(CascadeOperations = CascadeOperation.CascadeRead)]
+        //[OneToMany(CascadeOperations = CascadeOperation.CascadeRead)]
+        [OneToMany(CascadeOperations = CascadeOperation.All)]
         public List<Shot> Shots { get; set; }
 
         [ForeignKey(typeof(ScorePartie))]
@@ -49,7 +50,9 @@ namespace GreenSa.Models.GolfModel
             NombrePutt = nbPutt;
         }
 
-        //New constructor allowing for the addition of the shots in the data structure (see if old one still necessary)
+        /**
+         * New constructor allowing for the addition of the shots in the data structure (see if old one still necessary)
+         */
         public ScoreHole(Hole hole, int penality, int score, bool hit, int nbPutt, DateTime date, List<Shot> shots)
         {
             this.Hole = hole;

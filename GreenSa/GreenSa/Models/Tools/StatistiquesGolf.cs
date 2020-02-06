@@ -323,7 +323,7 @@ namespace GreenSa.Models.GolfModel
         public static ScoreHole saveForStats(Partie game, Hole hole, bool save)
         {
             ScoreHole h = new ScoreHole(hole, game.getPenalityCount(), game.getCurrentScore(), isHit(game.Shots, hole.Par), nbCoupPutt(game.Shots),DateTime.Now,game.Shots);
-            if (save)
+            if (save)//Currently cut from code, to be deleted if no impact on the app (functionality transferred to saveGameForStats())
             {
                 if (game.Shots.Count == 0)
                     throw new Exception("0 shots dans la liste des shots.");
@@ -340,22 +340,29 @@ namespace GreenSa.Models.GolfModel
                 //SQLiteNetExtensions.Extensions.WriteOperations.InsertWithChildren(connection, h, true); RECUSRSIF=true, parvient à insérer 1 shot
                 SQLiteNetExtensions.Extensions.WriteOperations.InsertOrReplaceWithChildren(connection, h, true);//InsertOrReplace, fonctionnel?
                 string sql = @"select last_insert_rowid()";
-                h.Id = connection.ExecuteScalar<int>(sql);
+                h.Id = connection.ExecuteScalar<int>(sql);//Updates the id of the ScoreHole stored in RAM, doesn't affect DB if SH inserted only once
             }
             return h;
         }
 
         /**
-         * Saves the given game
+         * Saves the given game if asked by the user
          * scoreOfThisPartie : the game statistics
+         * save : true to save the game, false otherwise (user option).
          */
-        public async static Task saveGameForStats(ScorePartie scoreOfThisPartie)
+        public async static Task saveGameForStats(ScorePartie scoreOfThisPartie, Boolean save)
         {
-            SQLite.SQLiteAsyncConnection connection = DependencyService.Get<ISQLiteDb>().GetConnectionAsync();
-            await connection.CreateTableAsync<ScoreHole>();
-            await connection.CreateTableAsync<ScorePartie>();
+            if (save)
+            {
+                SQLite.SQLiteAsyncConnection connection = DependencyService.Get<ISQLiteDb>().GetConnectionAsync();
+                await connection.CreateTableAsync<ScoreHole>();
+                await connection.CreateTableAsync<ScorePartie>();
+                await connection.CreateTableAsync<Club>();
+                await connection.CreateTableAsync<MyPosition>();
+                await connection.CreateTableAsync<Shot>();
 
-            await SQLiteNetExtensionsAsync.Extensions.WriteOperations.InsertOrReplaceWithChildrenAsync(connection, scoreOfThisPartie,false);
+                await SQLiteNetExtensionsAsync.Extensions.WriteOperations.InsertOrReplaceWithChildrenAsync(connection, scoreOfThisPartie, true);
+            }
         }
 
         /**

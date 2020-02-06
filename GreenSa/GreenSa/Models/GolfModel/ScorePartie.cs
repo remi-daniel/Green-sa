@@ -15,7 +15,7 @@ namespace GreenSa.Models.GolfModel
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
-        [OneToMany(CascadeOperations = CascadeOperation.CascadeRead)]
+        [OneToMany(CascadeOperations = CascadeOperation.All)]
         public List<ScoreHole> scoreHoles { get; set; }
 
         public DateTime DateDebut { get; set; }
