@@ -73,7 +73,7 @@ namespace GreenSa.ViewController.Profile.MyGames
             ScorePartie sp = (ScorePartie)listPartie.SelectedItem;
             if (state == 0)//if in games panel in profil page
             {
-                await Navigation.PushModalAsync(new DetailsPartiePage((ScorePartie)listPartie.SelectedItem));
+                await Navigation.PushAsync(new DetailsPartiePage((ScorePartie)listPartie.SelectedItem));
             } else if (state == 1)//if in stats panel in profil page
             {
                 if (this.partieStatPage == null)
@@ -84,7 +84,7 @@ namespace GreenSa.ViewController.Profile.MyGames
                 {
                     this.partieStatPage.changePartie(sp, sp.GolfName);
                 }
-                await Navigation.PushModalAsync(this.partieStatPage);
+                await Navigation.PushAsync(this.partieStatPage);
             } else if (state == 2)//when loading an existing and not finished game
             {
                 partie.ScoreOfThisPartie = sp;

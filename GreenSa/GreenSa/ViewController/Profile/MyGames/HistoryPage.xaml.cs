@@ -14,14 +14,15 @@ namespace GreenSa.ViewController.Profile.MyGames
         private ScoreHole Sh;
         private int HoleNumber;//The position of this hole in the golf course
         private ObservableCollection<Tuple<Shot, IEnumerable<Club>>> item;
+        bool LateralNavigation;
 
-        public HistoryPage(ScorePartie sp, int holeNumber)
+        public HistoryPage(ScorePartie sp, int holeNumber, bool lateralNavigation)
         {
             InitializeComponent();
             HoleNumber = holeNumber;
             Sp = sp;
             Sh = sp.scoreHoles[holeNumber];
-            HoleNumber = holeNumber;
+            LateralNavigation = lateralNavigation;
 
             hole_finished.Margin = new Thickness(-8, MainPage.responsiveDesign(19), 0, MainPage.responsiveDesign(20));
             ListShotPartie.Margin = new Thickness(MainPage.responsiveDesign(10), MainPage.responsiveDesign(34), MainPage.responsiveDesign(10), MainPage.responsiveDesign(58));
@@ -35,23 +36,42 @@ namespace GreenSa.ViewController.Profile.MyGames
             scorelegende.Margin = new Thickness(MainPage.responsiveDesign(260), MainPage.responsiveDesign(5), 0, 0);
             next.BackgroundColor = Color.FromHex("39B54A");
             next.Margin = new Thickness(0, MainPage.responsiveDesign(5), MainPage.responsiveDesign(5), MainPage.responsiveDesign(5));
-            stop.Margin = new Thickness(MainPage.responsiveDesign(5), MainPage.responsiveDesign(5), 0, MainPage.responsiveDesign(5));
-            next.WidthRequest = stop.Width;
+            previous.Margin = new Thickness(MainPage.responsiveDesign(5), MainPage.responsiveDesign(5), 0, MainPage.responsiveDesign(5));
+            next.WidthRequest = previous.Width;
             add.Margin = new Thickness(MainPage.responsiveDesign(5), MainPage.responsiveDesign(15), MainPage.responsiveDesign(5), 0);
+
+            
         }
 
         protected async override void OnAppearing()
         {
             base.OnAppearing();
+
+            if (HoleNumber <= 0)
+            {
+                previous.IsVisible = false;
+            }
+            else if (HoleNumber >= Sp.scoreHoles.Count - 1)
+            {
+                next.IsVisible = false;
+            }
+
+            //Ensures that previous HistoryPage is cleared from the navigation when going from one hole to the next
+            //(so that the back button can take the user back directly to the DetailsPartiePage)
+            if (LateralNavigation)
+            {
+                Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
+            }
+
             List <Club> clubs = await GestionGolfs.getListClubsAsync(null);
             item = new ObservableCollection<Tuple<Shot, IEnumerable<Club>>>(Sh.Shots.Select(s => new Tuple<Shot, IEnumerable<Club>>(s, clubs)));
             ListShotPartie.ItemsSource = item;
             numero.Text = "Trou n°" + (HoleNumber+1) + " :";
             hole_finished.Text = "TROU N°" + (HoleNumber+1);
             par.Text = Sh.Hole.Par.ToString();
+
             updateScoreText();
         }
-
 
         /**
          * Updates the score label text
@@ -83,7 +103,7 @@ namespace GreenSa.ViewController.Profile.MyGames
             //ARRAYINDEXINVALID
             //Couleur du bouton en fonction (vert pour les 2 si oui, gris sinon -> plutôt non affiché)
 
-            //await Navigation.PushModalAsync(new HistoryPage(Sp, HoleNumber+1));
+            await Navigation.PushAsync(new HistoryPage(Sp, (HoleNumber+1), true));
         }
 
         /**
@@ -91,7 +111,7 @@ namespace GreenSa.ViewController.Profile.MyGames
          */
         private async void previousHoleClicked(object sender, EventArgs e)
         {
-            //await Navigation.PushModalAsync(new HistoryPage(Sp, HoleNumber-1));
+            await Navigation.PushAsync(new HistoryPage(Sp, (HoleNumber-1),true));
         }
 
         /**

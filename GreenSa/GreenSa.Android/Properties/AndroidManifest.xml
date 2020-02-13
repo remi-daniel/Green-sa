@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="5" android:versionName="1.2" package="com.insaRennes.GreenSa" android:installLocation="preferExternal">
-	<uses-sdk android:minSdkVersion="24" android:targetSdkVersion="27" />
+	<uses-sdk android:minSdkVersion="14" android:targetSdkVersion="27" />
 	<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 	<uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
@@ -10,6 +10,6 @@
 	<uses-permission android:name="android.permission.INTERNET" />
 	<application android:label="Green'Sa" android:icon="@drawable/icon">
 		<meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyBPGyRxcQy7RzQDh8jvvHmpYIsknkv16f8" />
-  <!--   AIzaSyDl9BagDICekDiRBq7HNvGiHzAStLw-8UI -->
+		<!--   AIzaSyDl9BagDICekDiRBq7HNvGiHzAStLw-8UI -->
 	</application>
 </manifest>

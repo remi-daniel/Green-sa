@@ -15,7 +15,7 @@
             <Image x:Name="top" Source="fond_profile_page.png" Grid.Row="0"
                     HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand"
             />
-            <Label x:Name="hole_finished" Grid.Row="0" Text="TROU N°X" FontAttributes="Bold" VerticalOptions="Start" HorizontalOptions="Center" TextColor="White" FontSize="29"/>
+            <Label x:Name="hole_finished" Grid.Row="0" Text="TROU N°" FontAttributes="Bold" VerticalOptions="Start" HorizontalOptions="Center" TextColor="White" FontSize="29"/>
             <Label x:Name="club" Grid.Row="1" Text="Club" FontAttributes="Bold" VerticalOptions="Start" HorizontalOptions="Start" TextColor="Gray" FontSize="20"/>
             <Label x:Name="distance" Grid.Row="1" Text="Distance" FontAttributes="Bold" VerticalOptions="Start" HorizontalOptions="Start" TextColor="Gray" FontSize="20"/>
             <Label x:Name="pen" Grid.Row="1" Text="Pen." FontAttributes="Bold" VerticalOptions="Start" HorizontalOptions="Start" TextColor="Gray" FontSize="20"/>
@@ -61,7 +61,7 @@
             <Button x:Name="add" Text="Ajouter un coup" Grid.Row="1" VerticalOptions="End" HorizontalOptions="Center" FontAttributes="Bold"
                    TextColor="White" FontSize="18" BackgroundColor="Gray" CornerRadius="30" />
 
-            <Label x:Name="numero" Text="Trou n°X :" Grid.Row="2" VerticalOptions="Start" HorizontalOptions="Start" FontAttributes="Bold"
+            <Label x:Name="numero" Text="Trou n° :" Grid.Row="2" VerticalOptions="Start" HorizontalOptions="Start" FontAttributes="Bold"
                    TextColor="Black" FontSize="30"/>
             <Label x:Name="par" Text="?" Grid.Row="2" VerticalOptions="Start" HorizontalOptions="Start" FontAttributes="Bold"
                    TextColor="Black" FontSize="40"/>
@@ -76,7 +76,7 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
-                <Button x:Name="stop"  Margin="0, 0, 0, 5" Text="Trou précédent" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold"
+                <Button x:Name="previous"  Margin="0, 0, 0, 5" Text="Trou précédent" Grid.Column="0" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold"
                    TextColor="White" FontSize="17" BackgroundColor="Gray" CornerRadius="30" Clicked="previousHoleClicked"/>
                 <Button x:Name="next" Margin="0, 0, 0, 5" Text="Trou suivant" Grid.Column="1" VerticalOptions="Center" HorizontalOptions="Center" FontAttributes="Bold"
                    TextColor="White" FontSize="17" CornerRadius="30" Clicked="nextHoleClicked"/>

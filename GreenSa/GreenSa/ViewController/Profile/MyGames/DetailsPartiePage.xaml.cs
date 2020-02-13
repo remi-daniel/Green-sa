@@ -75,7 +75,7 @@ namespace GreenSa.ViewController.Profile.MyGames
             Button b = (Button)sender;
             DisplayScoreCard displayCard = (DisplayScoreCard)b.CommandParameter;
             int scoreHolePosition = int.Parse(displayCard.number) - 1;//The holes have numbers from 1 to n, and are sorted in the list from 0 to n-1
-            await Navigation.PushModalAsync(new HistoryPage(sp,scoreHolePosition));
+            await Navigation.PushAsync(new HistoryPage(sp,scoreHolePosition,false));
         }
 
     }
