@@ -61,8 +61,6 @@ namespace GreenSa.Models.GolfModel
             this.Penality = penality;
             Date = date;
             NombrePutt = nbPutt;
-            //Fix: on clone la liste Shots de la Partie car elle sera réutilisée à chaque trou, et puisqu'à la fin de partie on réinsère les ScoreHole
-            //avec le ScorePartie, le ShotHole est mis à jour et la valeur de this.Shots vaudrait à cet instant la même chose chez tous les ScoreHole -> bug
             List<Shot> copy = new List<Shot>(shots);
             this.Shots = copy;
         }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using Xamarin.Forms;
@@ -15,6 +16,7 @@ namespace GreenSa.ViewController.Profile.MyGames
         private int HoleNumber;//The position of this hole in the golf course
         private ObservableCollection<Tuple<Shot, IEnumerable<Club>>> item;
         bool LateralNavigation;
+        List<Club> clubs;
 
         public HistoryPage(ScorePartie sp, int holeNumber, bool lateralNavigation)
         {
@@ -56,14 +58,14 @@ namespace GreenSa.ViewController.Profile.MyGames
                 next.IsVisible = false;
             }
 
-            //Ensures that previous HistoryPage is cleared from the navigation when going from one hole to the next
+            //Ensures that previous HistoryPage is cleared from the navigation stack when going from one hole to the next
             //(so that the back button can take the user back directly to the DetailsPartiePage)
             if (LateralNavigation)
             {
                 Navigation.RemovePage(Navigation.NavigationStack[Navigation.NavigationStack.Count - 2]);
             }
 
-            List <Club> clubs = await GestionGolfs.getListClubsAsync(null);
+            clubs = await GestionGolfs.getListClubsAsync(null);
             item = new ObservableCollection<Tuple<Shot, IEnumerable<Club>>>(Sh.Shots.Select(s => new Tuple<Shot, IEnumerable<Club>>(s, clubs)));
             ListShotPartie.ItemsSource = item;
             numero.Text = "Trou n°" + (HoleNumber+1) + " :";
@@ -78,7 +80,16 @@ namespace GreenSa.ViewController.Profile.MyGames
          */
         private void updateScoreText()
         {
-            int totalScore = (Sh.Score + Sh.Hole.Par);
+            int penalities = 0;
+            int nbShots = 0;
+            foreach (Shot shot in Sh.Shots)
+            {
+                penalities += shot.PenalityCount;
+                nbShots++;
+            }
+            Sh.Penality = penalities;
+            Sh.Score = nbShots;
+            int totalScore = (Sh.Penality + Sh.Score - Sh.Hole.Par);//Update score in SHOT??
             if (totalScore >= 0)
             {
                 score.Text = "+" + totalScore;
@@ -90,20 +101,12 @@ namespace GreenSa.ViewController.Profile.MyGames
 
         }
 
-
-        //---------------------------------------
-
-
-
         /**
          * This method is called when clicking on the button to see the results of the next hole
          */
         private async void nextHoleClicked(object sender, EventArgs e)
         {
-            //ARRAYINDEXINVALID
-            //Couleur du bouton en fonction (vert pour les 2 si oui, gris sinon -> plutôt non affiché)
-
-            await Navigation.PushAsync(new HistoryPage(Sp, (HoleNumber+1), true));
+            await Navigation.PushAsync(new HistoryPage(Sp, (HoleNumber + 1), true));
         }
 
         /**
@@ -111,7 +114,7 @@ namespace GreenSa.ViewController.Profile.MyGames
          */
         private async void previousHoleClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new HistoryPage(Sp, (HoleNumber-1),true));
+            await Navigation.PushAsync(new HistoryPage(Sp, (HoleNumber - 1), true));
         }
 
         /**
@@ -119,7 +122,22 @@ namespace GreenSa.ViewController.Profile.MyGames
          */
         private void OnPenalityCompleted(object sender, EventArgs e)
         {
-            
+            //gets the shot associated to the picker
+            var picker = sender as Picker;
+            picker.TextColor = Color.White;
+            var tgr = picker.GestureRecognizers[0] as TapGestureRecognizer;
+            Shot shot = (Shot)tgr.CommandParameter;
+            int penalityCount = 0;
+            if (picker.SelectedItem != null)
+            {
+                penalityCount = (int)picker.SelectedItem;
+            }
+            //updates penality count of the shot and the corresponding label text
+            if (shot != null)
+            {
+                shot.SetPenalityCount(penalityCount);
+                this.updateScoreText();
+            }
         }
 
         /**
@@ -127,7 +145,22 @@ namespace GreenSa.ViewController.Profile.MyGames
          */
         private async void OnShotDeletedClicked(object sender, EventArgs e)
         {
-            
+            //gets the shot associated to the image
+            var image = sender as Image;
+            var tgr = image.GestureRecognizers[0] as TapGestureRecognizer;
+            Shot shot = (Shot)tgr.CommandParameter;
+            var confirm = true;
+            if (!shot.Club.IsPutter())//if not a putter shot then ask a delete confirmation
+            {
+                confirm = await this.DisplayAlert("Suppression", "Voulez vous vraiment supprimer ce coup ?", "Oui", "Non");
+            }
+            if (confirm)//then remove the shot from list view source and from the game shots list
+            {
+                item.Remove(item.ToList().Find(tuple => tuple.Item1.Equals(shot)));
+
+                Sh.Shots.Remove(shot);
+                updateScoreText();
+            }
         }
 
         /**
@@ -135,7 +168,22 @@ namespace GreenSa.ViewController.Profile.MyGames
          */
         private void OnClubChanged(object sender, EventArgs e)
         {
-            
+            //gets the shot associated to the image
+            var picker = sender as Picker;
+            var tgr = picker.GestureRecognizers[0] as TapGestureRecognizer;
+            Shot shot = null;
+            try
+            {
+                shot = (Shot)tgr.CommandParameter;
+                if (shot != null)
+                {
+                    shot.UpdateShotType();
+                }
+            }
+            catch (NullReferenceException ex)
+            {
+                Debug.WriteLine("Error : " + ex.StackTrace);
+            }
         }
 
         /**
@@ -143,12 +191,16 @@ namespace GreenSa.ViewController.Profile.MyGames
          */
         private void AddShotButtonClicked(object sender, EventArgs e)
         {
-           
+            Shot s = new Shot(Club.PUTTER, null, null, null, DateTime.Now);
+            Sh.Shots.Add(s);
+            
+            item.Add(new Tuple<Shot, IEnumerable<Club>>(s, clubs));
+            updateScoreText();
+
         }
 
         protected override bool OnBackButtonPressed()
         {
-            
             return base.OnBackButtonPressed();
         }
 
