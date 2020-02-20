@@ -45,7 +45,7 @@
                                     <Label Grid.Column="3" HorizontalOptions="Center" TextColor="Black" FontSize="16" FontAttributes="Bold" VerticalOptions="Center" Text="{Binding penalities}" Margin="0"/>
                                     <Frame Grid.Column="4" Margin="0, 0, 5, 0" HorizontalOptions="Center" HasShadow="False" VerticalOptions="Center" CornerRadius="{Binding firstFrameCornerRadius}" BackgroundColor="{Binding firstFrameBackgroundColor}" OutlineColor="{Binding firstFrameBorderColor}" Padding="2" WidthRequest="{Binding firstFrameWidth}">
                                         <Frame HorizontalOptions="Center" VerticalOptions="Center" HasShadow="False" CornerRadius="{Binding secondFrameCornerRadius}" BackgroundColor="{Binding secondFrameBackgroundColor}" OutlineColor="{Binding secondFrameBorderColor}" WidthRequest="{Binding secondFrameWidth}" Padding="3">
-                                            <Label Grid.Column="4" HorizontalOptions="Center" TextColor="{Binding textColor}" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" Text="{Binding score}" Margin="0"/>
+                                            <Label Grid.Column="4" HorizontalOptions="Center" TextColor="{Binding textColor}" FontSize="18" FontAttributes="Bold" VerticalOptions="Center" Text="{Binding nbShots}" Margin="0"/>
                                         </Frame>
                                     </Frame>
                                 </Grid>

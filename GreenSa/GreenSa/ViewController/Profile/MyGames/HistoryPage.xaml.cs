@@ -1,4 +1,5 @@
 ﻿using GreenSa.Models.GolfModel;
+using GreenSa.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,6 +18,8 @@ namespace GreenSa.ViewController.Profile.MyGames
         private ObservableCollection<Tuple<Shot, IEnumerable<Club>>> item;
         bool LateralNavigation;
         List<Club> clubs;
+        private bool Edited = false;
+        private List<Shot> shotsToDelete = new List<Shot>();
 
         public HistoryPage(ScorePartie sp, int holeNumber, bool lateralNavigation)
         {
@@ -45,6 +48,9 @@ namespace GreenSa.ViewController.Profile.MyGames
             
         }
 
+        /**
+         * This method is executed when the page is loaded
+         * */
         protected async override void OnAppearing()
         {
             base.OnAppearing();
@@ -76,6 +82,15 @@ namespace GreenSa.ViewController.Profile.MyGames
         }
 
         /**
+         * This method is executed when another page is loaded
+         * */
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            saveChanges();
+        }
+
+        /**
          * Updates the score label text
          */
         private void updateScoreText()
@@ -88,17 +103,15 @@ namespace GreenSa.ViewController.Profile.MyGames
                 nbShots++;
             }
             Sh.Penality = penalities;
-            Sh.Score = nbShots;
-            int totalScore = (Sh.Penality + Sh.Score - Sh.Hole.Par);//Update score in SHOT??
-            if (totalScore >= 0)
+            Sh.Score = nbShots + penalities - Sh.Hole.Par;//The total score and penalities are recalculated and saved, in case the user made any changes
+            if (Sh.Score >= 0)
             {
-                score.Text = "+" + totalScore;
+                score.Text = "+" + Sh.Score;
             }
             else
             {
-                score.Text = totalScore.ToString();
+                score.Text = Sh.Score.ToString();
             }
-
         }
 
         /**
@@ -138,6 +151,7 @@ namespace GreenSa.ViewController.Profile.MyGames
                 shot.SetPenalityCount(penalityCount);
                 this.updateScoreText();
             }
+            Edited = true;
         }
 
         /**
@@ -152,14 +166,16 @@ namespace GreenSa.ViewController.Profile.MyGames
             var confirm = true;
             if (!shot.Club.IsPutter())//if not a putter shot then ask a delete confirmation
             {
-                confirm = await this.DisplayAlert("Suppression", "Voulez vous vraiment supprimer ce coup ?", "Oui", "Non");
+                confirm = await this.DisplayAlert("Suppression", "Voulez vous vraiment supprimer ce coup ?", "Oui", "Non");//NOT NECESSARY ANYMORE?
             }
             if (confirm)//then remove the shot from list view source and from the game shots list
             {
                 item.Remove(item.ToList().Find(tuple => tuple.Item1.Equals(shot)));
 
+                shotsToDelete.Add(shot);//adds the shot to the list of shots to delete from database when the user quits the pages and confirms his decision
                 Sh.Shots.Remove(shot);
                 updateScoreText();
+                Edited = true;
             }
         }
 
@@ -178,6 +194,7 @@ namespace GreenSa.ViewController.Profile.MyGames
                 if (shot != null)
                 {
                     shot.UpdateShotType();
+                    Edited = true;
                 }
             }
             catch (NullReferenceException ex)
@@ -196,20 +213,34 @@ namespace GreenSa.ViewController.Profile.MyGames
             
             item.Add(new Tuple<Shot, IEnumerable<Club>>(s, clubs));
             updateScoreText();
-
+            Edited = true;
         }
 
         protected override bool OnBackButtonPressed()
         {
+            
             return base.OnBackButtonPressed();
         }
 
         /**
-         * Syncs the changes made to the database
+         * Asks for confirmation and syncs the changes made to the database when the user quits the page
          */
         private async void saveChanges()
         {
-            
+            if (Edited)
+            {
+                bool confirm = await this.DisplayAlert("Enregistrement", "Voulez-vous enregistrer vos modifications ?", "Oui", "Non");
+                if (confirm)
+                {
+                    foreach(Shot s in shotsToDelete)//removes from the database the shots marked as deleted
+                    {
+                        SQLite.SQLiteAsyncConnection connection = DependencyService.Get<ISQLiteDb>().GetConnectionAsync();
+                        await connection.DeleteAsync(s);
+                    }
+
+                    await StatistiquesGolf.saveGameForStats(Sp, StatistiquesGolf.getProfil().SaveStats);//applies the rest of the modifications to the database by replacing the data for this game
+                }
+            }
         }
     }
 }
