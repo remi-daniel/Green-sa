@@ -9,7 +9,8 @@ namespace GreenSa.ViewController.Profile.MyGames
 {
     public partial class DetailsPartiePage : ContentPage
     {
-        ScorePartie sp;
+        public ScorePartie sp { get; set; }
+
         public DetailsPartiePage(ScorePartie sp)
         {
             InitializeComponent();
@@ -88,5 +89,10 @@ namespace GreenSa.ViewController.Profile.MyGames
             await Navigation.PushAsync(new HistoryPage(sp,scoreHolePosition,false));
         }
 
+        public void changeScorePartie(ScorePartie scorePartie)
+        {
+            sp = scorePartie;
+            OnAppearing();
+        }
     }
 }

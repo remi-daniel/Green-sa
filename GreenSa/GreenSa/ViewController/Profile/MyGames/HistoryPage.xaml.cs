@@ -20,6 +20,7 @@ namespace GreenSa.ViewController.Profile.MyGames
         List<Club> clubs;
         private bool Edited = false;
         private List<Shot> shotsToDelete = new List<Shot>();
+        private IReadOnlyList<Page> navStack;
 
         public HistoryPage(ScorePartie sp, int holeNumber, bool lateralNavigation)
         {
@@ -54,6 +55,7 @@ namespace GreenSa.ViewController.Profile.MyGames
         protected async override void OnAppearing()
         {
             base.OnAppearing();
+            navStack = Navigation.NavigationStack;
 
             if (HoleNumber <= 0)
             {
@@ -97,12 +99,18 @@ namespace GreenSa.ViewController.Profile.MyGames
         {
             int penalities = 0;
             int nbShots = 0;
+            int nbPutters = 0;
             foreach (Shot shot in Sh.Shots)
             {
                 penalities += shot.PenalityCount;
                 nbShots++;
+                if(shot.Club.Equals(Club.PUTTER))
+                {
+                    nbPutters++;
+                }
             }
             Sh.Penality = penalities;
+            Sh.NombrePutt = nbPutters;
             Sh.Score = nbShots + penalities - Sh.Hole.Par;//The total score and penalities are recalculated and saved, in case the user made any changes
             if (Sh.Score >= 0)
             {
@@ -229,17 +237,28 @@ namespace GreenSa.ViewController.Profile.MyGames
         {
             if (Edited)
             {
+                SQLite.SQLiteAsyncConnection connection = DependencyService.Get<ISQLiteDb>().GetConnectionAsync();
                 bool confirm = await this.DisplayAlert("Enregistrement", "Voulez-vous enregistrer vos modifications ?", "Oui", "Non");
                 if (confirm)
                 {
-                    foreach(Shot s in shotsToDelete)//removes from the database the shots marked as deleted
+                    foreach (Shot s in shotsToDelete)//removes from the database the shots marked as deleted
                     {
-                        SQLite.SQLiteAsyncConnection connection = DependencyService.Get<ISQLiteDb>().GetConnectionAsync();
                         await connection.DeleteAsync(s);
                     }
 
-                    await StatistiquesGolf.saveGameForStats(Sp, StatistiquesGolf.getProfil().SaveStats);//applies the rest of the modifications to the database by replacing the data for this game
+                    //applies the rest of the modifications to the database by replacing the data for this game
+                    await StatistiquesGolf.saveGameForStats(Sp, StatistiquesGolf.getProfil().SaveStats);
                 }
+                else
+                {
+                    //reloads the old game data from the database to discard the changes
+                    await connection.CreateTableAsync<ScorePartie>();
+                    ScorePartie scorePartie = await SQLiteNetExtensionsAsync.Extensions.ReadOperations.GetWithChildrenAsync<ScorePartie>(connection,Sp.Id, recursive: true);
+                    ((DetailsPartiePage)navStack[navStack.Count - 1]).changeScorePartie(scorePartie);
+
+                }
+
+
             }
         }
     }
