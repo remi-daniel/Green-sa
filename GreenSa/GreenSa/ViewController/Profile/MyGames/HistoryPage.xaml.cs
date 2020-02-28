@@ -61,7 +61,7 @@ namespace GreenSa.ViewController.Profile.MyGames
             {
                 previous.IsVisible = false;
             }
-            else if (HoleNumber >= Sp.scoreHoles.Count - 1)
+            if (HoleNumber >= Sp.scoreHoles.Count - 1)
             {
                 next.IsVisible = false;
             }

@@ -6,9 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GreenSa.ViewController.Profile.MyGames;
+using System.IO;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Java.IO;
 
 namespace GreenSa.ViewController.Play.Game
 {
@@ -92,7 +94,7 @@ namespace GreenSa.ViewController.Play.Game
         {
             Profil profil = StatistiquesGolf.getProfil();
             await partie.gameFinished(profil.SaveStats);
-            await Navigation.PushModalAsync(new DetailsPartiePage(partie.ScoreOfThisPartie));
+            await Navigation.PushAsync(new DetailsPartiePage(partie.ScoreOfThisPartie));
         }
 
         /**
