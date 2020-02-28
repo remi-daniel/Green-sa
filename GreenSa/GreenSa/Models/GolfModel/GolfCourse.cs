@@ -18,17 +18,20 @@ namespace GreenSa.Models.GolfModel
 
         [OneToMany(CascadeOperations = CascadeOperation.All)]
         public List<Hole> Holes { get;   set; }
-        
+
+        public string xmlFile { get; set; }
+
 
         public GolfCourse()
         {
         }
 
-        public GolfCourse(string name, string nameGolf, List<Hole> holes)
+        public GolfCourse(string name, string nameGolf, List<Hole> holes, string xmlfile)
         {
             this.Name = name;
             this.Holes = holes;
             this.NameGolf = nameGolf;
+            this.xmlFile = xmlfile;
         }
 
         public List<Hole>.Enumerator GetHoleEnumerator()

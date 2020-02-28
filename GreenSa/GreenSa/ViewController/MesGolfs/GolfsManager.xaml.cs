@@ -51,6 +51,47 @@ namespace GreenSa.ViewController.MesGolfs
             }
         }
 
+        async private void OnGolfTapped(object sender, EventArgs e)
+        {
+            var image = sender as Image;
+            var tgr = image.GestureRecognizers[0] as TapGestureRecognizer;
+            //for each line, the golf course name is stored in the ball image CommandParameter attribute to be able to identify an image to its golf course
+            var name = tgr.CommandParameter.ToString();
+            var confirmShare = await DisplayAlert("Partager", "Voulez-vous partager ce golf à vos amis ?", "Oui", "Non");
+            if (confirmShare)
+            {
+                GolfCourse file = null;
+                SQLite.SQLiteConnection connection = DependencyService.Get<ISQLiteDb>().GetConnection();
+                try
+                {
+                    //remove golf course from database
+                    connection.BeginTransaction();
+                    file = connection.Get<GolfCourse>(name);
+                    connection.Commit();
+                }
+                catch (Exception bddException)
+                {
+                    await this.DisplayAlert("Erreur avec la base de donnée", bddException.StackTrace, "Ok");
+                    connection.Rollback();
+                }
+                //await DisplayAlert("Alert", name, "OK");
+                string res = file.xmlFile;
+                if (file != null)
+                {
+                    await DisplayAlert("Race", res, "OK");
+                }
+                var fn = name + ".txt";
+                var file = Path.Combine(FileSystem.CacheDirectory, fn);
+                File.WriteAllText(file, res);
+
+                await Share.RequestAsync(new ShareFileRequest
+                {
+                    Title = Title,
+                    File = new ShareFile(file)
+                });
+            }
+        }
+
         /** 
          * Deletes a golf course from the ListView and from the database
          */
