@@ -220,7 +220,7 @@ namespace GreenSa.iOS
             {
                 var mapModel = (Map)e.NewElement;
 
-                if (Control == null)
+                if (Control == null)//
                 {
                     MKMapView mapView = null;
 
