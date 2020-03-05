@@ -1,7 +1,10 @@
 ﻿using GreenSa.Models.GolfModel;
+using GreenSa.Models.ViewElements;
+using GreenSa.Persistence;
 using GreenSa.ViewController.Profile.Statistiques.StatistiquesGolfCourse;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +19,8 @@ namespace GreenSa.ViewController.Profile.MyGames
     {
         private int state;
         private PartieStatPage partieStatPage;
-        private List<ScorePartie> scoreParties;
+       // private List<ScorePartie> scoreParties;
+        private ObservableCollection<ScorePartie> scoreParties;
         private Partie partie;
 
         public ViewPartieListPage()
@@ -42,7 +46,7 @@ namespace GreenSa.ViewController.Profile.MyGames
             InitializeComponent();
             this.state = state;
             this.partieStatPage = null;
-            this.scoreParties = scoreParties;
+            this.scoreParties = new ObservableCollection<ScorePartie>(scoreParties);
             this.partie = partie;
         }
 
@@ -55,7 +59,7 @@ namespace GreenSa.ViewController.Profile.MyGames
                 if (scoreParties == null)
                 {
                     //Sort in descending order of games date
-                    scoreParties = (await StatistiquesGolf.getScoreParties()).OrderByDescending(d => d.DateDebut).ToList();
+                    scoreParties = new ObservableCollection<ScorePartie>((await StatistiquesGolf.getScoreParties()).OrderByDescending(d => d.DateDebut).ToList());
                 }
                 listPartie.ItemsSource = scoreParties;
             } catch (Exception e)
@@ -94,6 +98,42 @@ namespace GreenSa.ViewController.Profile.MyGames
                 }
                 //partie.holeFinishedCount++;//needs to increment one last time because this attibute is initialized to -1 to start at 0 after first main game page appearing
                 await Navigation.PushAsync(new Play.Game.MainGamePage(partie), false);
+            }
+        }
+
+        /** 
+         * Deletes a golf course from the ListView and from the database
+         */
+        private async void DeleteGame(object sender, EventArgs e)
+        {
+            var image = sender as Image;
+            var tgr = image.GestureRecognizers[0] as TapGestureRecognizer;
+            //for each line, the golf course name is stored in the cross image CommandParameter attribute to be able to identify an image to its golf course
+            var id = tgr.CommandParameter.ToString();
+            var confirmDelete = await this.DisplayAlert("Suppression d'une partie", "Voulez-vous vraiment supprimer cette partie ?", "Oui", "Non");
+            if (confirmDelete)
+            {
+                //remove golf course cell from ListView
+                var toDelete = image.BindingContext as ScorePartie;
+                scoreParties.Remove(toDelete);
+                
+
+                //var vm = BindingContext as GolfCourseListViewModel;
+                //vm.RemoveGolfCourse.Execute(toDelete);
+
+                SQLite.SQLiteConnection connection = DependencyService.Get<ISQLiteDb>().GetConnection();
+                try
+                {
+                    //remove golf course from database
+                    connection.BeginTransaction();
+                    connection.Delete<ScorePartie>(id);
+                    connection.Commit();
+                }
+                catch (Exception bddException)
+                {
+                    await this.DisplayAlert("Erreur avec la base de donnée", bddException.StackTrace, "Ok");
+                    connection.Rollback();
+                }
             }
         }
     }
