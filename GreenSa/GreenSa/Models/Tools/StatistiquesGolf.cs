@@ -320,29 +320,9 @@ namespace GreenSa.Models.GolfModel
          * save : true to save the hole stats, false otherwise. false returns the ScoreHole anyway
          * return the created ScoreHole
          */
-        public static ScoreHole saveForStats(Partie game, Hole hole, bool save)
+        public static ScoreHole generateScoreHole(Partie game, Hole hole)
         {
-            ScoreHole h = new ScoreHole(hole, game.getPenalityCount(), game.getCurrentScore(), isHit(game.Shots, hole.Par), nbCoupPutt(game.Shots),DateTime.Now,game.Shots);
-            if (save)//Currently cut from code, to be deleted if no impact on the app (functionality transferred to saveGameForStats())
-            {
-                if (game.Shots.Count == 0)
-                    throw new Exception("0 shots dans la liste des shots.");
-                SQLite.SQLiteConnection connection = DependencyService.Get<ISQLiteDb>().GetConnection();
-                connection.CreateTable<Club>();
-                connection.CreateTable<MyPosition>();
-                connection.CreateTable<Shot>();
-                //first let's insert in the database all the shots currently stored in the game
-                //SQLiteNetExtensions.Extensions.WriteOperations.InsertOrReplaceAllWithChildren(connection, game.Shots, true);
-                connection.CreateTable<ScoreHole>();
-
-                //then creates a ScoreHole object that stores the hole statistics and insert it in the database
-                //SQLiteNetExtensions.Extensions.WriteOperations.InsertWithChildren(connection, h, false); OLD
-                //SQLiteNetExtensions.Extensions.WriteOperations.InsertWithChildren(connection, h, true); RECUSRSIF=true, parvient à insérer 1 shot
-                SQLiteNetExtensions.Extensions.WriteOperations.InsertOrReplaceWithChildren(connection, h, true);//InsertOrReplace, fonctionnel?
-                string sql = @"select last_insert_rowid()";
-                h.Id = connection.ExecuteScalar<int>(sql);//Updates the id of the ScoreHole stored in RAM, doesn't affect DB if SH inserted only once
-            }
-            return h;
+            return new ScoreHole(hole, game.getPenalityCount(), game.getCurrentScore(), isHit(game.Shots, hole.Par), nbCoupPutt(game.Shots),DateTime.Now,game.Shots);   
         }
 
         /**

@@ -120,7 +120,7 @@ namespace GreenSa.Models.GolfModel
          */
         public async void holeFinished(bool saveForStatistics)
         {
-            ScoreHole sh = StatistiquesGolf.saveForStats(this, itHole.Current, false);
+            ScoreHole sh = StatistiquesGolf.generateScoreHole(this, itHole.Current);
             ScoreOfThisPartie.add(sh);
             ScoreOfThisPartie.DateFin = DateTime.Now;
             await StatistiquesGolf.saveGameForStats(ScoreOfThisPartie,saveForStatistics);

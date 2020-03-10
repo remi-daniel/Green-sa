@@ -2,6 +2,7 @@
 using GreenSa.Models.ViewElements;
 using GreenSa.Persistence;
 using GreenSa.ViewController.Profile.Statistiques.StatistiquesGolfCourse;
+using SQLiteNetExtensions.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -19,8 +20,7 @@ namespace GreenSa.ViewController.Profile.MyGames
     {
         private int state;
         private PartieStatPage partieStatPage;
-       // private List<ScorePartie> scoreParties;
-        private ObservableCollection<ScorePartie> scoreParties;
+        private ObservableCollection<ScorePartie> scoreParties;//ObervableCollection is used to update automatically the ListView when an item is deleted
         private Partie partie;
 
         public ViewPartieListPage()
@@ -107,26 +107,19 @@ namespace GreenSa.ViewController.Profile.MyGames
         private async void DeleteGame(object sender, EventArgs e)
         {
             var image = sender as Image;
-            var tgr = image.GestureRecognizers[0] as TapGestureRecognizer;
-            //for each line, the golf course name is stored in the cross image CommandParameter attribute to be able to identify an image to its golf course
-            var id = tgr.CommandParameter.ToString();
             var confirmDelete = await this.DisplayAlert("Suppression d'une partie", "Voulez-vous vraiment supprimer cette partie ?", "Oui", "Non");
             if (confirmDelete)
             {
-                //remove golf course cell from ListView
+                //removes the game from the collection, the ListView is updated automatically
                 var toDelete = image.BindingContext as ScorePartie;
                 scoreParties.Remove(toDelete);
-                
-
-                //var vm = BindingContext as GolfCourseListViewModel;
-                //vm.RemoveGolfCourse.Execute(toDelete);
 
                 SQLite.SQLiteConnection connection = DependencyService.Get<ISQLiteDb>().GetConnection();
                 try
                 {
-                    //remove golf course from database
+                    //removes game from database
                     connection.BeginTransaction();
-                    connection.Delete<ScorePartie>(id);
+                    connection.Delete(toDelete, recursive:true);
                     connection.Commit();
                 }
                 catch (Exception bddException)
