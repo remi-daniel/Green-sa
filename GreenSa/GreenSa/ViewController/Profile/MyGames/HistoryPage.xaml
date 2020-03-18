@@ -1,9 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local3="clr-namespace:GreenSa.Models.ViewElements"
              x:Class="GreenSa.ViewController.Profile.MyGames.HistoryPage">
-
     <ContentPage.Content>
         <Grid x:Name="page">
             <Grid.RowDefinitions>
@@ -82,5 +80,5 @@
                    TextColor="White" FontSize="17" CornerRadius="30" Clicked="nextHoleClicked"/>
             </Grid>
         </Grid>
-    </ContentPage.Content>
+    </StackLayout>
 </ContentPage>
