@@ -1,7 +1,11 @@
 ﻿using GreenSa.Models.GolfModel;
+using GreenSa.Models.ViewElements;
+using GreenSa.Persistence;
 using GreenSa.ViewController.Profile.Statistiques.StatistiquesGolfCourse;
+using SQLiteNetExtensions.Extensions;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,7 +20,7 @@ namespace GreenSa.ViewController.Profile.MyGames
     {
         private int state;
         private PartieStatPage partieStatPage;
-        private List<ScorePartie> scoreParties;
+        private ObservableCollection<ScorePartie> scoreParties;//ObervableCollection is used to update automatically the ListView when an item is deleted
         private Partie partie;
 
         public ViewPartieListPage()
@@ -42,7 +46,7 @@ namespace GreenSa.ViewController.Profile.MyGames
             InitializeComponent();
             this.state = state;
             this.partieStatPage = null;
-            this.scoreParties = scoreParties;
+            this.scoreParties = new ObservableCollection<ScorePartie>(scoreParties);
             this.partie = partie;
         }
 
@@ -55,7 +59,7 @@ namespace GreenSa.ViewController.Profile.MyGames
                 if (scoreParties == null)
                 {
                     //Sort in descending order of games date
-                    scoreParties = (await StatistiquesGolf.getScoreParties()).OrderByDescending(d => d.DateDebut).ToList();
+                    scoreParties = new ObservableCollection<ScorePartie>((await StatistiquesGolf.getScoreParties()).OrderByDescending(d => d.DateDebut).ToList());
                 }
                 listPartie.ItemsSource = scoreParties;
             } catch (Exception e)
@@ -73,7 +77,7 @@ namespace GreenSa.ViewController.Profile.MyGames
             ScorePartie sp = (ScorePartie)listPartie.SelectedItem;
             if (state == 0)//if in games panel in profil page
             {
-                await Navigation.PushModalAsync(new DetailsPartiePage((ScorePartie)listPartie.SelectedItem));
+                await Navigation.PushAsync(new DetailsPartiePage((ScorePartie)listPartie.SelectedItem));
             } else if (state == 1)//if in stats panel in profil page
             {
                 if (this.partieStatPage == null)
@@ -84,7 +88,7 @@ namespace GreenSa.ViewController.Profile.MyGames
                 {
                     this.partieStatPage.changePartie(sp, sp.GolfName);
                 }
-                await Navigation.PushModalAsync(this.partieStatPage);
+                await Navigation.PushAsync(this.partieStatPage);
             } else if (state == 2)//when loading an existing and not finished game
             {
                 partie.ScoreOfThisPartie = sp;
@@ -94,6 +98,35 @@ namespace GreenSa.ViewController.Profile.MyGames
                 }
                 //partie.holeFinishedCount++;//needs to increment one last time because this attibute is initialized to -1 to start at 0 after first main game page appearing
                 await Navigation.PushAsync(new Play.Game.MainGamePage(partie), false);
+            }
+        }
+
+        /** 
+         * Deletes a golf course from the ListView and from the database
+         */
+        private async void DeleteGame(object sender, EventArgs e)
+        {
+            var image = sender as Image;
+            var confirmDelete = await this.DisplayAlert("Suppression d'une partie", "Voulez-vous vraiment supprimer cette partie ?", "Oui", "Non");
+            if (confirmDelete)
+            {
+                //removes the game from the collection, the ListView is updated automatically
+                var toDelete = image.BindingContext as ScorePartie;
+                scoreParties.Remove(toDelete);
+
+                SQLite.SQLiteConnection connection = DependencyService.Get<ISQLiteDb>().GetConnection();
+                try
+                {
+                    //removes game from database
+                    connection.BeginTransaction();
+                    connection.Delete(toDelete, recursive:true);
+                    connection.Commit();
+                }
+                catch (Exception bddException)
+                {
+                    await this.DisplayAlert("Erreur avec la base de donnée", bddException.StackTrace, "Ok");
+                    connection.Rollback();
+                }
             }
         }
     }
