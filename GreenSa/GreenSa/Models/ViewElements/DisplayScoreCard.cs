@@ -13,7 +13,7 @@ namespace GreenSa.Models.GolfModel
         public string par { get; set; }
         public string putt { get; set; }
         public string penalities { get; set; }
-        public string nbShots { get; set; }
+        public string score { get; set; }
 
         public int firstFrameCornerRadius { get; set; }
         public Color firstFrameBackgroundColor { get; set; }
@@ -31,7 +31,7 @@ namespace GreenSa.Models.GolfModel
             par = sh.Hole.Par.ToString();
             putt = sh.NombrePutt.ToString();
             penalities = sh.Penality.ToString();
-            nbShots = (sh.Score + sh.Hole.Par).ToString();
+            score = (sh.Score + sh.Hole.Par).ToString();
             this.setScoreSymbol(sh.Score, sh.Hole.Par);
             secondFrameWidth = firstFrameWidth - 2;
         }
@@ -117,12 +117,12 @@ namespace GreenSa.Models.GolfModel
         {
             number = i.ToString();
             par = p.ToString();
-            nbShots = "-";
+            score = "-";
         }
 
         public override string ToString()
         {
-            return number.ToString() + " : " + par.ToString() + " : " + nbShots.ToString();
+            return number.ToString() + " : " + par.ToString() + " : " + score.ToString();
         }
     }
 }

@@ -320,29 +320,40 @@ namespace GreenSa.Models.GolfModel
          * save : true to save the hole stats, false otherwise. false returns the ScoreHole anyway
          * return the created ScoreHole
          */
-        public static ScoreHole generateScoreHole(Partie game, Hole hole)
+        public static ScoreHole saveForStats(Partie game, Hole hole, bool save)
         {
-            return new ScoreHole(hole, game.getPenalityCount(), game.getCurrentScore(), isHit(game.Shots, hole.Par), nbCoupPutt(game.Shots),DateTime.Now,game.Shots);   
+            ScoreHole h = new ScoreHole(hole, game.getPenalityCount(), game.getCurrentScore(), isHit(game.Shots, hole.Par), nbCoupPutt(game.Shots),DateTime.Now);
+            if (save)
+            {
+                if (game.Shots.Count == 0)
+                    throw new Exception("0 shots dans la liste des shots.");
+                SQLite.SQLiteConnection connection = DependencyService.Get<ISQLiteDb>().GetConnection();
+                connection.CreateTable<Club>();
+                connection.CreateTable<MyPosition>();
+                connection.CreateTable<Shot>();
+                //first let's insert in the database all the shots currently stored in the game
+                SQLiteNetExtensions.Extensions.WriteOperations.InsertOrReplaceAllWithChildren(connection, game.Shots, true);
+                connection.CreateTable<ScoreHole>();
+
+                //then creates a ScoreHole object that stores the hole statistics and insert it in the database
+                SQLiteNetExtensions.Extensions.WriteOperations.InsertWithChildren(connection, h, false);
+                string sql = @"select last_insert_rowid()";
+                h.Id = connection.ExecuteScalar<int>(sql);
+            }
+            return h;
         }
 
         /**
-         * Saves the given game if asked by the user
+         * Saves the given game
          * scoreOfThisPartie : the game statistics
-         * save : true to save the game, false otherwise (user option).
          */
-        public async static Task saveGameForStats(ScorePartie scoreOfThisPartie, Boolean save)
+        public async static Task saveGameForStats(ScorePartie scoreOfThisPartie)
         {
-            if (save)
-            {
-                SQLite.SQLiteAsyncConnection connection = DependencyService.Get<ISQLiteDb>().GetConnectionAsync();
-                await connection.CreateTableAsync<ScoreHole>();
-                await connection.CreateTableAsync<ScorePartie>();
-                await connection.CreateTableAsync<Club>();
-                await connection.CreateTableAsync<MyPosition>();
-                await connection.CreateTableAsync<Shot>();
+            SQLite.SQLiteAsyncConnection connection = DependencyService.Get<ISQLiteDb>().GetConnectionAsync();
+            await connection.CreateTableAsync<ScoreHole>();
+            await connection.CreateTableAsync<ScorePartie>();
 
-                await SQLiteNetExtensionsAsync.Extensions.WriteOperations.InsertOrReplaceWithChildrenAsync(connection, scoreOfThisPartie, true);
-            }
+            await SQLiteNetExtensionsAsync.Extensions.WriteOperations.InsertOrReplaceWithChildrenAsync(connection, scoreOfThisPartie,false);
         }
 
         /**

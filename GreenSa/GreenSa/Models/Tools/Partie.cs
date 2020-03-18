@@ -118,12 +118,10 @@ namespace GreenSa.Models.GolfModel
          * Manages the end of the current hole
          * saveForStatistics : true to save the stats of the current hole, false to not save them
          */
-        public async void holeFinished(bool saveForStatistics)
+        public void holeFinished(bool saveForStatistics)
         {
-            ScoreHole sh = StatistiquesGolf.generateScoreHole(this, itHole.Current);
+            ScoreHole sh = StatistiquesGolf.saveForStats(this, itHole.Current, saveForStatistics);
             ScoreOfThisPartie.add(sh);
-            ScoreOfThisPartie.DateFin = DateTime.Now;
-            await StatistiquesGolf.saveGameForStats(ScoreOfThisPartie,saveForStatistics);
             Shots.Clear();
         }
 
@@ -136,7 +134,7 @@ namespace GreenSa.Models.GolfModel
             if (saveForStatistics)
             {
                 ScoreOfThisPartie.DateFin = DateTime.Now;
-                await StatistiquesGolf.saveGameForStats(ScoreOfThisPartie, saveForStatistics);
+                await StatistiquesGolf.saveGameForStats(ScoreOfThisPartie);
             }
         }
 

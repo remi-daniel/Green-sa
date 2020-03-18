@@ -71,8 +71,8 @@
     <Compile Include="Models\GolfModel\GolfCourse.cs" />
     <Compile Include="Models\Tools\Partie.cs" />
     <Compile Include="Models\Exceptions\EmptyStringException.cs" />
-    <Compile Include="ViewController\Test\MapsTestPage.xaml.cs">
-      <DependentUpon>MapsTestPage.xaml</DependentUpon>
+    <Compile Include="ViewController\MainPageTest.xaml.cs">
+      <DependentUpon>MainPageTest.xaml</DependentUpon>
     </Compile>
     <Compile Include="ViewController\MesGolfs\GolfsManager.xaml.cs">
       <DependentUpon>GolfsManager.xaml</DependentUpon>
@@ -156,9 +156,6 @@
     </Reference>
     <Reference Include="Microcharts.Forms, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microcharts.Forms.0.8.3-pre\lib\portable-net45+win8+wpa81+wp8\Microcharts.Forms.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Android">
-      <HintPath>..\..\..\..\..\..\..\..\..\..\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\ReferenceAssemblies\Microsoft\Framework\MonoAndroid\v8.1\Mono.Android.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.11.0.2\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.dll</HintPath>
@@ -381,7 +378,7 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ViewController\Test\MapsTestPage.xaml">
+    <EmbeddedResource Include="ViewController\MainPageTest.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

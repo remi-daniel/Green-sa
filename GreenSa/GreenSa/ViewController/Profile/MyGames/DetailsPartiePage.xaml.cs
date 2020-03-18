@@ -9,21 +9,10 @@ namespace GreenSa.ViewController.Profile.MyGames
 {
     public partial class DetailsPartiePage : ContentPage
     {
-        public ScorePartie sp { get; set; }
-
+        
         public DetailsPartiePage(ScorePartie sp)
         {
             InitializeComponent();
-            this.sp = sp;
-        }
-
-        /**
-         * This method is executed when the page is loaded
-         * */
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-
             List<DisplayScoreCard> list = new List<DisplayScoreCard>();
             int i = 1;
             int totPar = 0;
@@ -39,7 +28,6 @@ namespace GreenSa.ViewController.Profile.MyGames
                 totPutt += sh.NombrePutt;
                 totPen += sh.Penality;
                 totScore += (sh.Score + sh.Hole.Par);
-
             }
             listScore.ItemsSource = list;
 
@@ -54,8 +42,7 @@ namespace GreenSa.ViewController.Profile.MyGames
             {
                 score.Text = "+" + scoreDelta;
             }
-            if (sdAbs >= 100)
-            {
+            if (sdAbs >= 100) {
                 score.FontSize = 25;
                 score.Margin = new Thickness(MainPage.responsiveDesign(32), MainPage.responsiveDesign(33), 0, 0);
             }
@@ -78,21 +65,12 @@ namespace GreenSa.ViewController.Profile.MyGames
             date.Text = sp.DateString;
         }
 
-        /**
-        * This method is called when a hole is selected in the list and displays its game history
-        */
         private async void onHistoryClick(object sender, EventArgs e)
         {
             Button b = (Button)sender;
-            DisplayScoreCard displayCard = (DisplayScoreCard)b.CommandParameter;
-            int scoreHolePosition = int.Parse(displayCard.number) - 1;//The holes have numbers from 1 to n, and are sorted in the list from 0 to n-1
-            await Navigation.PushAsync(new HistoryPage(sp,scoreHolePosition,false));
+            //await Navigation.PushModalAsync(new Test.SeeBDContent());
+            await Navigation.PushModalAsync(new HistoryPage());
         }
 
-        public void changeScorePartie(ScorePartie scorePartie)
-        {
-            sp = scorePartie;
-            OnAppearing();
-        }
     }
 }

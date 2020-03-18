@@ -16,11 +16,6 @@
                                 <Label TextColor="Black" FontSize="15" FontAttributes="Bold" HorizontalOptions="Start" VerticalOptions="Center" Text="{Binding DateString}" Margin="0"/>
                                 <Label TextColor="Black" FontSize="15" HorizontalOptions="Start" VerticalOptions="Center" Margin="0"> :  </Label>
                                 <Label TextColor="Black" FontSize="15" HorizontalOptions="Start" VerticalOptions="Center" Text="{Binding GolfName}" Margin="0"/>
-                                <Image Source="croix_suppression.png" HorizontalOptions="EndAndExpand" VerticalOptions="Center" Margin="0">
-                                    <Image.GestureRecognizers>
-                                        <TapGestureRecognizer CommandParameter="{Binding Id}" Tapped="DeleteGame"/>
-                                    </Image.GestureRecognizers>
-                                </Image>
                             </StackLayout>
                         </ViewCell>
                     </DataTemplate>
