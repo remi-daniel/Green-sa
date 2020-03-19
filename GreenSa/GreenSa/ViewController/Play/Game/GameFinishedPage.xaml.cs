@@ -6,11 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GreenSa.ViewController.Profile.MyGames;
-using System.IO;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Java.IO;
 
 namespace GreenSa.ViewController.Play.Game
 {
