@@ -215,7 +215,7 @@ namespace GreenSa.ViewController.Option
          * Inserts a golf course in the database from an xml string describing the golf course
          * xmlGolfCourse : the xml string describing the golf course
          */
-        private void InsertGolfCourseBdd(String xmlGolfCourse)
+        public void InsertGolfCourseBdd(String xmlGolfCourse)
         {
             GolfCourse gc;
             try

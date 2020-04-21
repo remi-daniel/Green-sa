@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Xamarin.Essentials;
+using GreenSa.Models.Tools;
+using Android.Database.Sqlite;
 
 namespace GreenSa.ViewController.MesGolfs
 {
@@ -80,15 +83,62 @@ namespace GreenSa.ViewController.MesGolfs
                 {
                     await DisplayAlert("Race", res, "OK");
                 }
-                var fn = name + ".txt";
-                var file = Path.Combine(FileSystem.CacheDirectory, fn);
-                File.WriteAllText(file, res);
 
-                await Share.RequestAsync(new ShareFileRequest
+                
+                await Share.RequestAsync(new ShareTextRequest
                 {
-                    Title = Title,
-                    File = new ShareFile(file)
+                    Text = res,
+                    Title = "Partage golf"
                 });
+            }
+        }
+
+        async private void ImportGolf_Clicked(object sender, EventArgs e)
+        {
+            var import = await DisplayAlert("Importation", "Voulez-vous que le contenu de votre " +
+                "presse-papier soit utilisé pour créer un golf", "Oui", "Non");
+            if (import)
+            {
+                string text = await Clipboard.GetTextAsync();
+                if (string.Compare(text, "")==0)
+                {
+                    await DisplayAlert("Echec", "Votre presse-papier est vide !", "Ok");
+                }
+                else
+                {
+                    if(string.Compare(text, 0, "<GolfCourse>", 0, 11)==0)
+                    {
+                        GolfCourse gc;
+                        try
+                        {
+                            gc = GolfXMLReader.getSingleGolfCourseFromText(text);
+                            await DisplayAlert("r", gc.Name + " " + gc.NameGolf, "r");
+                            SQLite.SQLiteConnection connection = DependencyService.Get<ISQLiteDb>().GetConnection();
+                            await DisplayAlert("r", gc.Name + " " + gc.NameGolf, "r");
+                            try
+                            {
+                                connection.CreateTable<Hole>();
+                                connection.CreateTable<MyPosition>();
+                                connection.CreateTable<GolfCourse>();
+                                connection.BeginTransaction();
+                                connection.Insert(gc);
+                                connection.Commit();
+                                await this.DisplayAlert("Succès", "Le " +  " trous : " + " a été créé avec succès", "Continuer");
+                               
+                            }
+                            catch (SQLiteException bddException)
+                            {
+                                await this.DisplayAlert("Erreur avec la base de donnée", bddException.Source + " : Ce nom de golf existe déjà ou une autre erreur inattendu s'est produite", "Ok");
+                                connection.Rollback();
+                            }
+                        }
+                        catch (Exception xmlConversionException)
+                        {
+                            await this.DisplayAlert("Erreur lors de la conversion XML -> GolfCourse", xmlConversionException.StackTrace, "Ok");
+                        }
+                    }
+                }
+                
             }
         }
 
@@ -124,5 +174,6 @@ namespace GreenSa.ViewController.MesGolfs
                 }
             }
         }
+
     }
 }
