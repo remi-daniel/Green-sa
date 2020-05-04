@@ -30,7 +30,7 @@ namespace GreenSa.ViewController.Profile.Options
         public ProfileOptions()
         {
             InitializeComponent();
-            IOSAdapter.SafeArea(this, "white");
+            IOSAdapter.SafeArea(this, "green");
             photo.Margin = new Thickness(0, MainPage.responsiveDesign(30), 0, MainPage.responsiveDesign(5));
             photo.HeightRequest = MainPage.responsiveDesign(140);
             modifier.Margin = MainPage.responsiveDesign(15);
