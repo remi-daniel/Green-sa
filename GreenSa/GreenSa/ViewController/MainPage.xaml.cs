@@ -16,6 +16,9 @@ using System.Collections.ObjectModel;
 using GreenSa.Persistence;
 using GreenSa.Models.Profiles;
 using GreenSa.ViewController.Test;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
+using GreenSa.Models.Tools;
 
 namespace GreenSa.ViewController
 {
@@ -27,6 +30,7 @@ namespace GreenSa.ViewController
         {
             InitializeComponent();
             this.InitBDD();
+            IOSAdapter.SafeArea(this, "green");
         }
 
         protected override void OnAppearing()
@@ -62,7 +66,7 @@ namespace GreenSa.ViewController
          */
         public static int responsiveDesign(int pix)
         {
-            return (int)((pix * 4.1 / 1440.0) * Application.Current.MainPage.Width);
+            return (int)((pix * 4.1 / 1440.0) * Xamarin.Forms.Application.Current.MainPage.Width);
         }
 
 

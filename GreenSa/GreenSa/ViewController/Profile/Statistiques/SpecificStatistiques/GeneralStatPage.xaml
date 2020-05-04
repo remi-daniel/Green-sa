@@ -3,7 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewelements="clr-namespace:GreenSa.Models.ViewElements"
              x:Class="GreenSa.ViewController.Profile.Statistiques.SpecificStatistiques.GeneralStatPage"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             iOS:Page.UseSafeArea="true">
   
 
   <ContentPage.Content>

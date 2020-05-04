@@ -17,7 +17,7 @@ using GreenSa.Models.Profiles;
 
 using SQLite;
 using System.Collections.ObjectModel;
-
+using GreenSa.Models.Tools;
 
 namespace GreenSa.ViewController.Profile.Options
 {
@@ -33,6 +33,7 @@ namespace GreenSa.ViewController.Profile.Options
         public ChooseAvatar()
         {
             InitializeComponent();
+            IOSAdapter.SafeArea(this, "white");
             col = Color.Gray;
             title.FontSize = 30;
             ok.FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label));

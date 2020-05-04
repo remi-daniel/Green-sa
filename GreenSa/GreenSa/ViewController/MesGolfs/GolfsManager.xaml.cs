@@ -25,6 +25,7 @@ namespace GreenSa.ViewController.MesGolfs
         public GolfsManager()
         {
             InitializeComponent();
+            IOSAdapter.SafeArea(this, "white");
         }
 
         protected override async void OnAppearing()

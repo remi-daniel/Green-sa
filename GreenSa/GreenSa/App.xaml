@@ -6,5 +6,11 @@
 
 		<!-- Application resource dictionary -->
 
-	</Application.Resources>
+        <ResourceDictionary>
+            <Style TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="#226E8A" />
+            </Style>
+        </ResourceDictionary>
+
+    </Application.Resources>
 </Application>

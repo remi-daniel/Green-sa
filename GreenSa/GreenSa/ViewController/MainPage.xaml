@@ -8,7 +8,7 @@
 
     <ContentPage.Content>
         <Grid x:Name="page" RowSpacing="0">
-        <Grid.RowDefinitions>
+            <Grid.RowDefinitions>
             <RowDefinition x:Name="haut" Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>

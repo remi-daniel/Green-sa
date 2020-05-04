@@ -9,6 +9,7 @@ using GreenSa.ViewController.Profile.MyGames;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using GreenSa.Models.Tools;
 
 namespace GreenSa.ViewController.Play.Game
 {
@@ -19,6 +20,7 @@ namespace GreenSa.ViewController.Play.Game
         public GameFinishedPage(Partie partie)
         {
             InitializeComponent();
+            IOSAdapter.SafeArea(this, "white");
             this.partie = partie;
             coupe.HeightRequest = MainPage.responsiveDesign(80);
             coupe.Margin = new Thickness(0, MainPage.responsiveDesign(10), 0, 0);

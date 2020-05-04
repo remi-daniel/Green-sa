@@ -1,4 +1,5 @@
 ﻿using GreenSa.Models.GolfModel;
+using GreenSa.Models.Tools;
 using GreenSa.Models.ViewElements;
 using GreenSa.Persistence;
 using GreenSa.ViewController.Profile.Statistiques.StatistiquesGolfCourse;
@@ -26,6 +27,7 @@ namespace GreenSa.ViewController.Profile.MyGames
         public ViewPartieListPage()
         {
             InitializeComponent();
+            IOSAdapter.SafeArea(this, "white");
             this.state = 0;
             this.partieStatPage = null;
             this.scoreParties = null;
@@ -35,6 +37,7 @@ namespace GreenSa.ViewController.Profile.MyGames
         public ViewPartieListPage(int state)
         {
             InitializeComponent();
+            IOSAdapter.SafeArea(this, "white");
             this.state = state;
             this.partieStatPage = null;
             this.scoreParties = null;
@@ -44,6 +47,7 @@ namespace GreenSa.ViewController.Profile.MyGames
         public ViewPartieListPage(int state, List<ScorePartie> scoreParties, Partie partie)
         {
             InitializeComponent();
+            IOSAdapter.SafeArea(this, "white");
             this.state = state;
             this.partieStatPage = null;
             this.scoreParties = new ObservableCollection<ScorePartie>(scoreParties);

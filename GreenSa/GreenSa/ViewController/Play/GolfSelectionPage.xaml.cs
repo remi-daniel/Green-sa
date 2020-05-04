@@ -22,6 +22,7 @@ namespace GreenSa.ViewController.Play
         public GolfSelectionPage(Partie partie)
         {
             InitializeComponent();
+            IOSAdapter.SafeArea(this, "white");
             p = partie;
             golfCourseStatPage = null;
         }
@@ -29,6 +30,7 @@ namespace GreenSa.ViewController.Play
         public GolfSelectionPage()
         {
             InitializeComponent();
+            IOSAdapter.SafeArea(this, "white");
             p = null;
             golfCourseStatPage = null;
         }

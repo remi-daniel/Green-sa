@@ -3,7 +3,9 @@
              xmlns:viewelements="clr-namespace:GreenSa.Models.ViewElements"
              xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              x:Class="GreenSa.ViewController.Profile.Statistiques.StatistiquesGolfCourse.PartieStatPage"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="False"
+             xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             iOS:Page.UseSafeArea="true">
 
     <ContentPage.Content>
         <StackLayout Orientation="Vertical" BackgroundColor="#E9F8EA">
