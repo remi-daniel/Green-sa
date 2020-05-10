@@ -21,7 +21,6 @@ namespace GreenSa.ViewController.Profile.MyClubs
         public ClubSelectionPage()
         {
             InitializeComponent();
-            IOSAdapter.SafeArea(this, "white");
         }
 
         /**

@@ -10,6 +10,47 @@
             <Style TargetType="ContentPage">
                 <Setter Property="BackgroundColor" Value="#226E8A" />
             </Style>
+
+            <ControlTemplate x:Key="MainPageTemplate">
+
+                <Grid VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" ColumnSpacing="0" RowSpacing="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <!-- Begin Header -->
+                    <StackLayout
+                        Orientation="Vertical"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="FillAndExpand"
+                        Spacing="0"
+                        BackgroundColor="#2B2B2B"
+                        HeightRequest="45"
+                        Grid.Column="0" Grid.Row="0">
+                        <StackLayout.Padding>
+                            <OnPlatform x:TypeArguments="Thickness"
+                            iOS="10, 10, 10, 10"
+                            Android="0, 0, 0, 0"
+                            WinPhone="10, 10, 10, 10" />
+                        </StackLayout.Padding>
+                        <!-- My header content to make my app the prettiest. -->
+                        <Image Source="fleche.png" WidthRequest="25" HeightRequest="25" HorizontalOptions="Start" VerticalOptions="FillAndExpand">
+                            <Image.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnBackButtonPressed" />
+                            </Image.GestureRecognizers>
+                        </Image>
+                    </StackLayout>
+                    <!-- End Header -->
+
+                    <!-- Begin Content -->
+                    <StackLayout Grid.Column="0" Grid.Row="1">
+                        <ContentPresenter VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" />
+                    </StackLayout>
+                    <!-- End Content -->
+                </Grid>
+            </ControlTemplate>
+
         </ResourceDictionary>
 
     </Application.Resources>

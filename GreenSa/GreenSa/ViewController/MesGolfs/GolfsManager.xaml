@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewElements="clr-namespace:GreenSa.Models.ViewElements"
              x:Class="GreenSa.ViewController.MesGolfs.GolfsManager"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="True">
     <ContentPage.Content>
         <StackLayout>
             <viewElements:MyLabel Text="Liste de vos parcours de golf" FontAttributes="Bold" Margin="0, 10, 0, 5" FontSize="21" HorizontalOptions="CenterAndExpand" />

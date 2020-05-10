@@ -30,7 +30,6 @@ namespace GreenSa.ViewController.Play.Game
         public MainGamePage(Partie partie)
         {
             InitializeComponent();
-            IOSAdapter.SafeArea(this, "green");
             forceVent.Margin = new Thickness(35, 10, 0, 0);
             windImg.Margin = new Thickness(35, 5, 0, 0);
             windImg.HeightRequest = MainPage.responsiveDesign(25);

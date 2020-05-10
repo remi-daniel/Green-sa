@@ -14,7 +14,6 @@ namespace GreenSa.ViewController.Profile.MyGames
         public DetailsPartiePage(ScorePartie sp)
         {
             InitializeComponent();
-            IOSAdapter.SafeArea(this, "white");
             this.sp = sp;
         }
 

@@ -15,7 +15,12 @@ namespace GreenSa
         public App()
         {
             InitializeComponent();
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new NavigationPage(new MainPage())
+            {
+                BarBackgroundColor = Color.FromHex("3ab54a"),
+                BarTextColor = Color.White
+                
+            };
         }
 
 
@@ -37,6 +42,11 @@ namespace GreenSa
         protected override void OnResume()
         {
             // Handle when your app resumes
+        }
+
+        public async void OnBackButtonPressed(object sender, EventArgs e)
+        {
+            await ((NavigationPage)Application.Current.MainPage).PopAsync();
         }
     }
 }

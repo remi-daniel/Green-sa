@@ -17,6 +17,7 @@ namespace GreenSa.Models.Tools
         /*
          * This method will automatically create margins on the top and bottom of the screen
          * if the device is under iOS, preventing the app from running fullscreen and colliding with the iOS UI/the notch
+         * Useful only for pages not using the navigation bar (currently only the Main Page)
          * Parameters :
          * p : the page calling this method
          * color : a string referencing the color to be used for the margin

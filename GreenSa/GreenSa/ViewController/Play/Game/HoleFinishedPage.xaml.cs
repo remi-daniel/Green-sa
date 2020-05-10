@@ -24,7 +24,6 @@ namespace GreenSa.ViewController.Play.Game
         public HoleFinishedPage(Partie partie)
         {
             InitializeComponent();
-            IOSAdapter.SafeArea(this, "white");
             this.partie = partie;
             hole_finished.Margin = new Thickness(-8, MainPage.responsiveDesign(19), 0, MainPage.responsiveDesign(20));
             ListShotPartie.Margin = new Thickness(MainPage.responsiveDesign(10), MainPage.responsiveDesign(34), MainPage.responsiveDesign(10), MainPage.responsiveDesign(58));

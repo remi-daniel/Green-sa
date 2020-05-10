@@ -24,7 +24,6 @@ namespace GreenSa.ViewController.Option
         public OptionPage()
         {
             InitializeComponent();
-            IOSAdapter.SafeArea(this, "white");
             DBConnection = DependencyService.Get<ISQLiteDb>().GetConnection();
             profil = StatistiquesGolf.getProfil();
             if (profil != null)

@@ -29,7 +29,6 @@ namespace GreenSa.ViewController.Option
         public ImportGolfCourse()
         {
             InitializeComponent();
-            IOSAdapter.SafeArea(this, "white");
             this.pins = new List<Pin>();
 
             //Init some content on the view

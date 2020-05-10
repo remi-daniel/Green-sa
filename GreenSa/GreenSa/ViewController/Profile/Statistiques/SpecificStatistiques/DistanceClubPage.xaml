@@ -4,9 +4,7 @@
              x:Class="GreenSa.ViewController.Profile.Statistiques.SpecificStatistiques.DistanceClubPage"
              xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              xmlns:viewelements="clr-namespace:GreenSa.Models.ViewElements"
-             NavigationPage.HasNavigationBar="false"
-             xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-             iOS:Page.UseSafeArea="true">
+             NavigationPage.HasNavigationBar="True">
 
     <microcharts:ChartView x:Name="chartView" />
     <!--<ContentPage.Content>

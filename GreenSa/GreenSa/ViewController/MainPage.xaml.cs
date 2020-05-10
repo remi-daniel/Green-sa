@@ -17,7 +17,6 @@ using GreenSa.Persistence;
 using GreenSa.Models.Profiles;
 using GreenSa.ViewController.Test;
 using Xamarin.Forms.PlatformConfiguration;
-using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
 using GreenSa.Models.Tools;
 
 namespace GreenSa.ViewController
@@ -30,12 +29,15 @@ namespace GreenSa.ViewController
         {
             InitializeComponent();
             this.InitBDD();
-            IOSAdapter.SafeArea(this, "green");
+            NavigationPage page = App.Current.MainPage as NavigationPage;
+            IOSAdapter.SafeArea(this,"green");//Method needed to ensure correct display under iOS because no NavigationBar on this page
         }
 
         protected override void OnAppearing()
         {
             this.titre.Margin = new Thickness(0, 0, 0, 42);
+
+
         }
 
         /**
@@ -82,6 +84,8 @@ namespace GreenSa.ViewController
 
         async private void OnProfilClicked(object sender, EventArgs e)
         {
+            //((Xamarin.Forms.NavigationPage)Xamarin.Forms.Application.Current.MainPage).BarBackgroundColor = Color.FromHex("3ab54a");
+
             await Navigation.PushAsync(new ProfilePage());
         }
 

@@ -5,7 +5,7 @@
              xmlns:gps_maps="clr-namespace:GreenSa.Models.Tools.GPS_Maps"
              xmlns:viewelements1="http://xamarin.com/schemas/2014/forms"
              x:Class="GreenSa.ViewController.Option.ImportGolfCourse"
-             NavigationPage.HasNavigationBar="False">
+             NavigationPage.HasNavigationBar="True">
     <ContentPage.Content>
         <StackLayout Orientation="Vertical">
             <viewelements:MyLabel Text="Création d'un nouveau parcours" FontAttributes="Bold" FontSize="21" HorizontalOptions="Center"  Margin="0, 10, 0, 5"/>

@@ -26,7 +26,6 @@ namespace GreenSa.ViewController.Profile.MyGames
         public HistoryPage(ScorePartie sp, int holeNumber, bool lateralNavigation)
         {
             InitializeComponent();
-            IOSAdapter.SafeArea(this, "white");
             HoleNumber = holeNumber;
             Sp = sp;
             Sh = sp.scoreHoles[holeNumber];
