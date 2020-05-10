@@ -4,7 +4,7 @@
              x:Class="GreenSa.ViewController.Profile.ProfilePage"
              xmlns:local="clr-namespace:GreenSa.MarkupExtension"
              xmlns:viewElements="clr-namespace:GreenSa.Models.ViewElements"
-             NavigationPage.HasNavigationBar="True">
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <Grid x:Name="page">
             <Grid.RowDefinitions>

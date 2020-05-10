@@ -33,6 +33,7 @@ namespace GreenSa.ViewController.Profile.Options
         public ChooseAvatar()
         {
             InitializeComponent();
+            IOSAdapter.SafeArea(this, "green");
             col = Color.Gray;
             title.FontSize = 30;
             ok.FontSize = Device.GetNamedSize(NamedSize.Large, typeof(Label));
