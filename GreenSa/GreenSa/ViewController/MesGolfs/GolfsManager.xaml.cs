@@ -80,11 +80,7 @@ namespace GreenSa.ViewController.MesGolfs
                 //await DisplayAlert("Alert", name, "OK");
                 string res = file.xmlFile;
                 if (file != null)
-                {
-                    await DisplayAlert("Race", res, "OK");
-                }
-
-                
+                                
                 await Share.RequestAsync(new ShareTextRequest
                 {
                     Text = res,
@@ -95,8 +91,8 @@ namespace GreenSa.ViewController.MesGolfs
 
         async private void ImportGolf_Clicked(object sender, EventArgs e)
         {
-            var import = await DisplayAlert("Importation", "Voulez-vous que le contenu de votre " +
-                "presse-papier soit utilisé pour créer un golf", "Oui", "Non");
+            var import = await DisplayAlert("Importation", "Le texte du golf que vous avez reçu doit être dans votre presse-papier. "+
+                "Voulez-vous continuez ?", "Oui", "Non");
             if (import)
             {
                 string text = await Clipboard.GetTextAsync();
@@ -112,9 +108,7 @@ namespace GreenSa.ViewController.MesGolfs
                         try
                         {
                             gc = GolfXMLReader.getSingleGolfCourseFromText(text);
-                            await DisplayAlert("r", gc.Name + " " + gc.NameGolf, "r");
                             SQLite.SQLiteConnection connection = DependencyService.Get<ISQLiteDb>().GetConnection();
-                            await DisplayAlert("r", gc.Name + " " + gc.NameGolf, "r");
                             try
                             {
                                 connection.CreateTable<Hole>();
@@ -123,8 +117,8 @@ namespace GreenSa.ViewController.MesGolfs
                                 connection.BeginTransaction();
                                 connection.Insert(gc);
                                 connection.Commit();
-                                await this.DisplayAlert("Succès", "Le " +  " trous : " + " a été créé avec succès", "Continuer");
-                               
+                                await this.DisplayAlert("Succès", "Le " + gc.Name +" au " + gc.NameGolf + " a bien été importer ! ", "Continuer");
+                                this.OnAppearing();
                             }
                             catch (SQLiteException bddException)
                             {
@@ -136,6 +130,10 @@ namespace GreenSa.ViewController.MesGolfs
                         {
                             await this.DisplayAlert("Erreur lors de la conversion XML -> GolfCourse", xmlConversionException.StackTrace, "Ok");
                         }
+                    }
+                    else
+                    {
+                        await DisplayAlert("Echec", "Le contenu de votre presse-papier ne corresond pas à celui attendu pour importer un golf !", "Ok");
                     }
                 }
                 
