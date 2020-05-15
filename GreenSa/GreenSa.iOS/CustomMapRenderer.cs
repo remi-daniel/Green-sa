@@ -134,8 +134,8 @@ namespace GreenSa.iOS
             foreach (IMKOverlay elem in nativeMap.Overlays)
                     if ( !(elem is MKCircle))
                         nativeMap.RemoveOverlay(elem);
-                    
-            CLLocationCoordinate2D[] coords = new CLLocationCoordinate2D[formsMap.RouteCoordinates.Count];
+
+            CLLocationCoordinate2D[] coords = new CLLocationCoordinate2D[formsMap.RouteCoordinates.Count];//CRASH  formsMaps = null
             int index = 0;
             foreach (var position in formsMap.RouteCoordinates)//48.0699815 ; -1.7472885
             {
@@ -252,10 +252,25 @@ namespace GreenSa.iOS
                 OnCollectionChanged(((Map)Element).Pins, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
             
             }
-                //------------------------------
+            //------------------------------
 
-             formsMap = (CustomMap)e.NewElement;
-            UpdatePolyLinePos();
+
+            //Here, e.newElement is null, with e.oldElement still holding the old value, the old set of 3 pins for the map. The program expects newElement to contain the updated values,but here we're not giving
+            //a new value/moving the pins, only keeping the old one while switching pages, so the program crashes (why is this method called while switching pages i have no idea). So we should say: if there is no newValue, just
+            //keep the old one, weirdo. This doesn't affect the android version so lower risk of unintended biehviour.
+
+            //formsMap = (CustomMap)e.NewElement;
+            if (e.NewElement!=null)
+            {
+                formsMap = (CustomMap)e.NewElement;
+            }
+            else
+            {
+                formsMap = (CustomMap)e.OldElement;
+            }
+
+            Debug.WriteLine("updatepolyline");
+            UpdatePolyLinePos();//THIS CALL CAUSES THE CRASH
 
             
         }

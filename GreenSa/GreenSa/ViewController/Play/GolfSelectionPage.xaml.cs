@@ -1,10 +1,12 @@
 ﻿using GreenSa.Models;
 using GreenSa.Models.GolfModel;
 using GreenSa.Models.Tools;
+using GreenSa.Models.ViewElements;
 using GreenSa.ViewController.Profile.MyGames;
 using GreenSa.ViewController.Profile.Statistiques.StatistiquesGolfCourse;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -61,7 +63,7 @@ namespace GreenSa.ViewController.Play
                 {
                     this.golfCourseStatPage.changeGolfCourse(g);
                 }
-                await Navigation.PushModalAsync(this.golfCourseStatPage, true);
+                await Navigation.PushAsync(this.golfCourseStatPage, true);
             } else
             {
                 p.GolfCourse = g;
@@ -82,6 +84,7 @@ namespace GreenSa.ViewController.Play
                         if (newGame)
                         {
                             await Navigation.PushAsync(new Game.MainGamePage(p), false);
+                            //await Navigation.PushAsync(new CustomizableContentPage(), true);
                         }
                         else//if load a not ended game then show the list of not ended games
                         {

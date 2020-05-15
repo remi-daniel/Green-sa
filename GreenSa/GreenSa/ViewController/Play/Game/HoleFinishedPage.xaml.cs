@@ -93,7 +93,7 @@ namespace GreenSa.ViewController.Play.Game
                 next.IsEnabled = false;
                 Profil profil = StatistiquesGolf.getProfil();
                 partie.holeFinished(profil.SaveStats);
-                await Navigation.PopModalAsync();
+                await Navigation.PopAsync();
                 next.IsEnabled = true;
             }
         }
@@ -116,7 +116,7 @@ namespace GreenSa.ViewController.Play.Game
                     MessagingCenter.Send<HoleFinishedPage, int>(this, "ReallyFinit", 2);//sends a message : the game is finished
                     Profil profil = StatistiquesGolf.getProfil();
                     partie.holeFinished(profil.SaveStats);
-                    await Navigation.PopModalAsync();
+                    await Navigation.PopAsync();
                 }
             }
             

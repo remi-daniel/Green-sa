@@ -14,6 +14,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Maps;
 using Xamarin.Forms.Xaml;
 using GreenSa.Models.Profiles;
+using GreenSa.Models.ViewElements;
 
 namespace GreenSa.ViewController.Play.Game
 {
@@ -30,6 +31,22 @@ namespace GreenSa.ViewController.Play.Game
         public MainGamePage(Partie partie)
         {
             InitializeComponent();
+            /*
+            if (EnableBackButtonOverride)
+            {
+                this.CustomBackButtonAction = async () =>
+                {
+                    var result = await this.DisplayAlert(null,
+                        "Hey wait now! are you sure " +
+                        "you want to go back?",
+                        "Yes go back", "Nope");
+
+                    if (result)
+                    {
+                        await Navigation.PopAsync(true);
+                    }
+                };
+            }*/
             forceVent.Margin = new Thickness(35, 10, 0, 0);
             windImg.Margin = new Thickness(35, 5, 0, 0);
             windImg.HeightRequest = MainPage.responsiveDesign(25);
@@ -153,6 +170,12 @@ namespace GreenSa.ViewController.Play.Game
                 {
                     await DisplayAlert("Gps non disponible", "La localisation GPS n'est pas disponible, assurez-vous de l'avoir activé.", "OK");
                     await Navigation.PopToRootAsync();//come back to root to avoid any problems in the game flow
+                    //var l = Navigation.NavigationStack[0];
+                    //await Navigation.PopAsync(false);//{System.NullReferenceException: Object reference not set to an instance of an object  at GreenSa.iOS.CustomMapRenderer.UpdatePolyLinePos () [0x0006e] in D:\Remi\Cours\3INFO\Etudes pratiques\Green-sa-master\GreenSa\GreenSa.iOS\CustomMapRenderer.cs:138   at GreenSa.iOS.CustomMapRenderer.OnElementChanged (Xamarin.Forms.Platform.iOS.ElementChangedEventArgs`1[TElement] e) [0x00180] in D:\Remi\Cours\3INFO\Etudes pratiques\Green-sa-master\GreenSa\GreenSa.iOS\CustomMapRenderer.cs:258   at Xamarin.Forms.Platform.iOS.VisualElementRenderer`1[TElement].SetElement (TElement element) [0x00122] in D:\a\1\s\Xamarin.Forms.Platform.iOS\VisualElementRenderer.cs:263   at Xamarin.Forms.Platform.iOS.VisualElementRenderer`1[TElement].Dispose (System.Boolean disposing) [0x0008c] in D:\a\1\s\Xamarin.Forms.Platform.iOS\VisualElementRenderer.cs:344   at Xamarin.Forms.Platform.iOS.ViewRenderer`2[TView,TNativeView].Dispose (System.Boolean disposing) [0x00000] in D:\a\1\s\Xamarin.Forms.Platform.iOS\ViewRenderer.cs:110   at GreenSa.iOS.CustomMapRenderer.Dispose (System.Boolean disposing) [0x000e6] in D:\Remi\Cours\3INFO\Etudes pratiques\Green-sa-master\GreenSa\GreenSa.iOS\CustomMapRenderer.cs:203   at Foundation.NSObject.Dispose () [0x00000] in /Library/Frameworks/Xamarin.iOS.framework/Versions/13.16.0.13/src/Xamarin.iOS/Foundation/NSObject2.cs:147   at Xamarin.Forms.Platform.iOS.VisualElementPackager.Dispose (System.Boolean disposing) [0x0003f] in D:\a\1\s\Xamarin.Forms.Platform.iOS\VisualElementPackager.cs:69   at Xamarin.Forms.Platform.iOS.VisualElementPackager.Dispose () [0x00000] in D:\a\1\s\Xamarin.Forms.Platform.iOS\VisualElementPackager.cs:37   at Xamarin.Forms.Platform.iOS.VisualElementRenderer`1[TElement].Dispose (System.Boolean disposing) [0x00058] in D:\a\1\s\Xamarin.Forms.Platform.iOS\VisualElementRenderer.cs:335   at Foundation.NSObject.Dispose () [0x00000] in /Library/Frameworks/Xamarin.iOS.framework/Versions/13.16.0.13/src/Xamarin.iOS/Foundation/NSObject2.cs:147   at Xamarin.Forms.Platform.iOS.DisposeHelpers.DisposeModalAndChildRenderers (Xamarin.Forms.Element view) [0x00041] in D:\a\1\s\Xamarin.Forms.Platform.iOS\DisposeHelpers.cs:18   at Xamarin.Forms.Platform.iOS.Platform.HandleChildRemoved (System.Object sender, Xamarin.Forms.ElementEventArgs e) [0x00006] in D:\a\1\s\Xamarin.Forms.Platform.iOS\Platform.cs:311   at Xamarin.Forms.Element.OnDescendantRemoved (Xamarin.Forms.Element child) [0x00000] in D:\a\1\s\Xamarin.Forms.Core\Element.cs:600   at Xamarin.Forms.Element.OnChildRemoved (Xamarin.Forms.Element child) [0x0001f] in D:\a\1\s\Xamarin.Forms.Core\Element.cs:325   at Xamarin.Forms.VisualElement.OnChildRemoved (Xamarin.Forms.Element child) [0x00000] in D:\a\1\s\Xamarin.Forms.Core\VisualElement.cs:764   at Xamarin.Forms.Page.OnInternalRemoved (Xamarin.Forms.VisualElement view) [0x00013] in D:\a\1\s\Xamarin.Forms.Core\Page.cs:393   at Xamarin.Forms.Page.InternalChildrenOnCollectionChanged (System.Object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e) [0x0002c] in D:\a\1\s\Xamarin.Forms.Core\Page.cs:363   at System.Collections.ObjectModel.ObservableCollection`1[T].OnCollectionChanged (System.Collections.Specialized.NotifyCollectionChangedEventArgs e) [0x00018] in /Library/Frameworks/Xamarin.iOS.framework/Versions/Current/src/Xamarin.iOS/external/corefx/src/System.ObjectModel/src/System/Collections/ObjectModel/ObservableCollection.cs:263   at System.Collections.ObjectModel.ObservableCollection`1[T].OnCollectionChanged (System.Collections.Specialized.NotifyCollectionChangedAction action, System.Object item, System.Int32 index) [0x00000] in /Library/Frameworks/Xamarin.iOS.framework/Versions/Current/src/Xamarin.iOS/external/corefx/src/System.ObjectModel/src/System/Collections/ObjectModel/ObservableCollection.cs:338   at System.Collections.ObjectModel.ObservableCollection`1[T].RemoveItem (System.Int32 index) [0x00021] in /Library/Frameworks/Xamarin.iOS.framework/Versions/Current/src/Xamarin.iOS/external/corefx/src/System.ObjectModel/src/System/Collections/ObjectModel/ObservableCollection.cs:182   at System.Collections.ObjectModel.Collection`1[T].Remove (T item) [0x00027] in /Library/Frameworks/Xamarin.iOS.framework/Versions/Current/src/Xamarin.iOS/external/corefx/src/Common/src/CoreLib/System/Collections/ObjectModel/Collection.cs:128   at Xamarin.Forms.NavigationPage.Xamarin.Forms.INavigationPageController.RemoveAsyncInner (Xamarin.Forms.Page page, System.Boolean animated, System.Boolean fast) [0x000e7] in D:\a\1\s\Xamarin.Forms.Core\NavigationPage.cs:316   at Xamarin.Forms.NavigationPage.PopAsyncInner (System.Boolean animated, System.Boolean fast) [0x0004c] in D:\a\1\s\Xamarin.Forms.Core\NavigationPage.cs:290   at Xamarin.Forms.NavigationPage.PopAsync (System.Boolean animated) [0x00140] in D:\a\1\s\Xamarin.Forms.Core\NavigationPage.cs:179   at GreenSa.ViewController.Play.Game.MainGamePage.OnAppearing () [0x0035c] in D:\Remi\Cours\3INFO\Etudes pratiques\Green-sa-master\GreenSa\GreenSa\ViewController\Play\Game\MainGamePage.xaml.cs:163   at System.Runtime.CompilerServices.AsyncMethodBuilderCore+<>c.<ThrowAsync>b__7_0 (System.Object state) [0x00000] in /Library/Frameworks/Xamarin.iOS.framework/Versions/Current/src/Xamarin.iOS/mcs/class/referencesource/mscorlib/system/runtime/compilerservices/AsyncMethodBuilder.cs:1021   at Foundation.NSAsyncSynchronizationContextDispatcher.Apply () [0x00000] in /Library/Frameworks/Xamarin.iOS.framework/Versions/13.16.0.13/src/Xamarin.iOS/Foundation/NSAction.cs:178 --- End of stack trace from previous location where exception was thrown ---  at (wrapper managed-to-native) UIKit.UIApplication.UIApplicationMain(int,string[],intptr,intptr)  at UIKit.UIApplication.Main (System.String[] args, System.IntPtr principal, System.IntPtr delegate) [0x00005] in /Library/Frameworks/Xamarin.iOS.framework/Versions/13.16.0.13/src/Xamarin.iOS/UIKit/UIApplication.cs:86   at UIKit.UIApplication.Main (System.String[] args, System.String principalClassName, System.String delegateClassName) [0x0000e] in /Library/Frameworks/Xamarin.iOS.framework/Versions/13.16.0.13/src/Xamarin.iOS/UIKit/UIApplication.cs:65   at GreenSa.iOS.Application.Main (System.String[] args) [0x00001] in D:\Remi\Cours\3INFO\Etudes pratiques\Green-sa-master\GreenSa\GreenSa.iOS\Main.cs:17 }
+                    /*
+                    for(int i=0; i<Navigation.NavigationStack.Count-1; i++){
+                        await Navigation.PopAsync();
+                    }*/
                 }
 
                 updateDistance(true);
@@ -186,11 +209,11 @@ namespace GreenSa.ViewController.Play.Game
         }
 
 
-        /**
-         * Localizes the user with his GPS
-         * return a MyPosition class wrapping the longitude and latitude of the user current position
-         */
-        public async Task<MyPosition> localize()
+            /**
+             * Localizes the user with his GPS
+             * return a MyPosition class wrapping the longitude and latitude of the user current position
+             */
+            public async Task<MyPosition> localize()
         {
             backToRadar.IsVisible = false;
             showLoad();
@@ -543,7 +566,7 @@ namespace GreenSa.ViewController.Play.Game
          */
         private async void onHoleFinishedButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PushModalAsync(new HoleFinishedPage(partie));
+            await Navigation.PushAsync(new HoleFinishedPage(partie));
         }
 
         /**
