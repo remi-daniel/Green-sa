@@ -41,7 +41,6 @@
     </Compile>
     <Compile Include="MarkupExtension\EmbeddedImage.cs" />
     <Compile Include="Models\Tools\IOSAdapter.cs" />
-    <Compile Include="Models\ViewElements\CustomizableContentPage.cs" />
     <Compile Include="Models\ViewElements\DisplayScoreCard.cs" />
     <Compile Include="Models\Tools\TestClassFactory.cs" />
     <Compile Include="Models\GolfModel\Club.cs" />

@@ -6,7 +6,7 @@
              xmlns:local3="clr-namespace:GreenSa.Models.ViewElements"
              x:Class="GreenSa.ViewController.Play.Game.MainGamePage"
              NavigationPage.HasBackButton="False"
-             NavigationPage.HasNavigationBar="True">
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <Grid x:Name="page" Margin="0">
 

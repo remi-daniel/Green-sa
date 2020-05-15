@@ -135,7 +135,7 @@ namespace GreenSa.iOS
                     if ( !(elem is MKCircle))
                         nativeMap.RemoveOverlay(elem);
 
-            CLLocationCoordinate2D[] coords = new CLLocationCoordinate2D[formsMap.RouteCoordinates.Count];//CRASH  formsMaps = null
+            CLLocationCoordinate2D[] coords = new CLLocationCoordinate2D[formsMap.RouteCoordinates.Count];
             int index = 0;
             foreach (var position in formsMap.RouteCoordinates)//48.0699815 ; -1.7472885
             {
@@ -254,12 +254,10 @@ namespace GreenSa.iOS
             }
             //------------------------------
 
-
-            //Here, e.newElement is null, with e.oldElement still holding the old value, the old set of 3 pins for the map. The program expects newElement to contain the updated values,but here we're not giving
-            //a new value/moving the pins, only keeping the old one while switching pages, so the program crashes (why is this method called while switching pages i have no idea). So we should say: if there is no newValue, just
-            //keep the old one, weirdo. This doesn't affect the android version so lower risk of unintended biehviour.
-
             //formsMap = (CustomMap)e.NewElement;
+
+            //Bugfix: When quitting the MainGamePage, the OnElementChanged method is called with a null NewElement, which makes UpdatePolyLinePos() crash if not handled.
+            //In this case because the positions of the pins have not been actually modified we can just use OldElement with the old values to call UpdatePoly.
             if (e.NewElement!=null)
             {
                 formsMap = (CustomMap)e.NewElement;
@@ -270,7 +268,7 @@ namespace GreenSa.iOS
             }
 
             Debug.WriteLine("updatepolyline");
-            UpdatePolyLinePos();//THIS CALL CAUSES THE CRASH
+            UpdatePolyLinePos();
 
             
         }
