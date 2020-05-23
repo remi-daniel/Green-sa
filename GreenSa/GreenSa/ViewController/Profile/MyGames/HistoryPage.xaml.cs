@@ -262,5 +262,25 @@ namespace GreenSa.ViewController.Profile.MyGames
 
             }
         }
+
+        void Entry_Completed(object sender, EventArgs e)
+        {
+            var text = ((Entry)sender).Text; //cast sender to access the properties of the Entry
+            var entry = sender as Entry;//gets the shot associated to the entry
+            Shot shot = (Shot)entry.ReturnCommandParameter;
+
+            int number;
+            bool isParsable = Int32.TryParse(text, out number);//attemps conversion of the entry to integer
+            if (isParsable)
+            {
+                shot.DistanceDone = number;
+                Edited = true;
+            }
+            else
+            {
+                entry.Text = shot.DistanceDone.ToString();
+                this.DisplayAlert("Erreur", "La distance spécifiée n'est pas valide.", "OK");
+            }
+        }
     }
 }

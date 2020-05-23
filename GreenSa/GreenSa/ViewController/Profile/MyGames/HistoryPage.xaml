@@ -18,7 +18,7 @@
             />
             <Label x:Name="hole_finished" Grid.Row="0" Text="TROU N°" FontAttributes="Bold" VerticalOptions="Start" HorizontalOptions="Center" TextColor="White" FontSize="29"/>
             <Label x:Name="club" Grid.Row="1" Text="Club" FontAttributes="Bold" VerticalOptions="Start" HorizontalOptions="Start" TextColor="Gray" FontSize="20"/>
-            <Label x:Name="distance" Grid.Row="1" Text="Distance" FontAttributes="Bold" VerticalOptions="Start" HorizontalOptions="Start" TextColor="Gray" FontSize="20"/>
+            <Label x:Name="distance" Grid.Row="1" Text="Dist. (m)" FontAttributes="Bold" VerticalOptions="Start" HorizontalOptions="Start" TextColor="Gray" FontSize="20"/>
             <Label x:Name="pen" Grid.Row="1" Text="Pen." FontAttributes="Bold" VerticalOptions="Start" HorizontalOptions="Start" TextColor="Gray" FontSize="20"/>
             <ListView x:Name="ListShotPartie" Grid.Row="1" RowHeight="50">
                 <ListView.ItemTemplate>
@@ -40,8 +40,9 @@
                                         <TapGestureRecognizer CommandParameter="{Binding Item1}"/>
                                     </Picker.GestureRecognizers>
                                 </Picker>
-                                <Label Grid.Column="1" Text="{Binding Item1.DistanceDone}"
-                                       BackgroundColor="Transparent" TextColor="DarkSlateGray" FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center"/>
+                                <Entry Keyboard="Numeric" Grid.Column="1" Placeholder="{Binding Item1.DistanceDone}" BackgroundColor="Transparent" TextColor="DarkSlateGray"
+                                       FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="50" ReturnCommandParameter="{Binding Item1}" 
+                                       Completed="Entry_Completed" PlaceholderColor="Black"/>
                                 <Picker Grid.Column="0" SelectedIndexChanged="OnClubChanged" ItemDisplayBinding="{Binding Name}" ItemsSource="{Binding Item2}" SelectedItem="{Binding Item1.Club}"
                                         BackgroundColor="Transparent" TitleColor="White" TextColor="White" FontSize="25" WidthRequest="90" FontAttributes="Bold" Margin="10, 0, 0, 0" HorizontalOptions="StartAndExpand">
                                     <Picker.GestureRecognizers>

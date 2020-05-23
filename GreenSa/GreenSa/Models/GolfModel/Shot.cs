@@ -3,6 +3,7 @@ using GreenSa.Models.Tools.GPS_Maps;
 using SQLite;
 using SQLiteNetExtensions.Attributes;
 using System;
+using System.Diagnostics;
 
 namespace GreenSa.Models.GolfModel
 {
@@ -50,6 +51,10 @@ namespace GreenSa.Models.GolfModel
 
         public DateTime Date { get; set; }
 
+        //A value that the user can input manually to change the distance displayed for a shot
+        //By default it's -1 the value won't be used and the normal distance will be displayed instead
+        public int EditedDistance { get; set; }
+
         //Hole that the user was playing while making this shot
         [ForeignKey(typeof(ScoreHole))]
         public int IdScoreHole { get; set; }
@@ -78,17 +83,20 @@ namespace GreenSa.Models.GolfModel
             }
         }
 
+        //Used to display the distance of the shot on HistoryPage or HoleFinishedPage
         [Ignore]
-        public string DistanceDone
+        public int DistanceDone
         {
-            get { return ((int)(this.RealShotDist())).ToString()+"m"; }
+            get { return ((int)(this.RealShotDist())); }
+            set { this.EditedDistance = value; }
         }
 
         /**
-         * Computes the distance of the real shot 
+         * Computes the distance of the real shot, or returns the value manually entered by the user
          */
         public double RealShotDist()
         {
+            if (this.EditedDistance > -1) return this.EditedDistance;
             if (InitPlace == null || RealShot == null) return 0;
             return CustomMap.DistanceTo(InitPlace.X,InitPlace.Y,RealShot.X,RealShot.Y,"M");
         }
@@ -119,6 +127,7 @@ namespace GreenSa.Models.GolfModel
             this.RealShot = realShot;
             this.Date = date;
             this.PenalityCount = 0;
+            this.EditedDistance = -1;
             this.ShotType = determineShotCategory();
         }
         
@@ -130,6 +139,7 @@ namespace GreenSa.Models.GolfModel
             this.RealShot = null;
             this.Date = date;
             this.ShotType = catergory;
+            this.EditedDistance = -1;
             this.PenalityCount = 0;
         }
 
@@ -160,7 +170,8 @@ namespace GreenSa.Models.GolfModel
         {
             ShotCategory sc = ShotCategory.ChipShot;
             //shots added in HoleFinishedPage => not real shots => you don't want to count it in stats
-            if (Target == null || RealShot == null || InitPlace == null)
+            //Shots whith a manually edited distance are also removed from stats
+            if (Target == null || RealShot == null || InitPlace == null || EditedDistance > -1)
             {
                 return sc;
             }
