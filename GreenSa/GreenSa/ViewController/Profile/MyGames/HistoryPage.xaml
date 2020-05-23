@@ -42,7 +42,7 @@
                                 </Picker>
                                 <Entry Keyboard="Numeric" Grid.Column="1" Placeholder="{Binding Item1.DistanceDone}" BackgroundColor="Transparent" TextColor="DarkSlateGray"
                                        FontSize="20" FontAttributes="Bold" HorizontalOptions="Center" VerticalOptions="Center" WidthRequest="50" ReturnCommandParameter="{Binding Item1}" 
-                                       Completed="Entry_Completed" PlaceholderColor="Black"/>
+                                       TextChanged="Entry_TextChanged" PlaceholderColor="Black"/>
                                 <Picker Grid.Column="0" SelectedIndexChanged="OnClubChanged" ItemDisplayBinding="{Binding Name}" ItemsSource="{Binding Item2}" SelectedItem="{Binding Item1.Club}"
                                         BackgroundColor="Transparent" TitleColor="White" TextColor="White" FontSize="25" WidthRequest="90" FontAttributes="Bold" Margin="10, 0, 0, 0" HorizontalOptions="StartAndExpand">
                                     <Picker.GestureRecognizers>

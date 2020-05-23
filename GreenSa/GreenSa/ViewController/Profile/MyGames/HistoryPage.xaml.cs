@@ -263,7 +263,7 @@ namespace GreenSa.ViewController.Profile.MyGames
             }
         }
 
-        void Entry_Completed(object sender, EventArgs e)
+        void Entry_TextChanged(object sender, EventArgs e)
         {
             var text = ((Entry)sender).Text; //cast sender to access the properties of the Entry
             var entry = sender as Entry;//gets the shot associated to the entry
