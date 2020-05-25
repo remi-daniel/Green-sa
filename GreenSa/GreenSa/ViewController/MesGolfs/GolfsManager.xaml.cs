@@ -16,7 +16,7 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Xamarin.Essentials;
 using GreenSa.Models.Tools;
-using Android.Database.Sqlite;
+using SQLite;
 
 namespace GreenSa.ViewController.MesGolfs
 {
@@ -123,7 +123,7 @@ namespace GreenSa.ViewController.MesGolfs
                             }
                             catch (SQLiteException bddException)
                             {
-                                await this.DisplayAlert("Erreur avec la base de donnée", bddException.Source + " : Ce nom de golf existe déjà ou une autre erreur inattendu s'est produite", "Ok");
+                                await this.DisplayAlert("Erreur avec la base de donnée", bddException.Source + " : Ce nom de golf existe déjà ou une autre erreur inattendue s'est produite", "Ok");
                                 connection.Rollback();
                             }
                         }

@@ -96,7 +96,8 @@ namespace GreenSa.ViewController
         }
 
 
-        async private void OnOptionsClicked(object sender, EventArgs e){ 
+        async private void OnOptionsClicked(object sender, EventArgs e){
+            //await Navigation.PushAsync(new SeeBDContent()); //A special page to view the database's content, disabled for release
             await Navigation.PushAsync(new OptionPage());
         }
     }

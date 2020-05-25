@@ -140,7 +140,7 @@ namespace GreenSa.ViewController.Play.Game
                 loadCard();
                 Hole nextHole = partie.getNextHole();
                 map.setHolePosition(nextHole);
-                numcoup.Text = partie.getCurrentHoleNumero() + "";                              
+                numcoup.Text = partie.getCurrentHoleNumero() + "";
                 parTrou.Text = "PAR " + partie.getNextHole().Par.ToString();
                 MyPosition position = new MyPosition(0, 0);
                 //make sure that the GPS is avaible
@@ -178,7 +178,8 @@ namespace GreenSa.ViewController.Play.Game
                 }
 
 
-            } else//user wants to stop the game
+            }
+            else//user wants to stop the game
             {
                 await Navigation.PushAsync(new GameFinishedPage(partie));
                 return;
@@ -187,11 +188,11 @@ namespace GreenSa.ViewController.Play.Game
         }
 
 
-            /**
-             * Localizes the user with his GPS
-             * return a MyPosition class wrapping the longitude and latitude of the user current position
-             */
-            public async Task<MyPosition> localize()
+        /**
+         * Localizes the user with his GPS
+         * return a MyPosition class wrapping the longitude and latitude of the user current position
+         */
+        public async Task<MyPosition> localize()
         {
             backToRadar.IsVisible = false;
             showLoad();
@@ -271,15 +272,20 @@ namespace GreenSa.ViewController.Play.Game
         private void updateScore()
         {
             int coups = 0;
-            foreach(ScoreHole sc in partie.ScoreOfThisPartie.scoreHoles) {
+            foreach (ScoreHole sc in partie.ScoreOfThisPartie.scoreHoles)
+            {
                 coups += sc.Score;
             }
-            if (coups > 0) {
+            if (coups > 0)
+            {
                 score.Text = "+" + coups.ToString();
-            } else {
+            }
+            else
+            {
                 score.Text = coups.ToString();
             }
-            if (coups >= 10) {
+            if (coups >= 10)
+            {
                 score.FontSize = 26;
             }
             else
@@ -298,14 +304,14 @@ namespace GreenSa.ViewController.Play.Game
             //manage done holes scores
             for (int i = 0; i < scoreHoles.Count; i++)
             {
-                DisplayScoreCard ds = new DisplayScoreCard(i+1, scoreHoles.ElementAt<ScoreHole>(i));
+                DisplayScoreCard ds = new DisplayScoreCard(i + 1, scoreHoles.ElementAt<ScoreHole>(i));
                 ScoreCard.Add(ds);
 
             }
             //manage not done holes scores
-            for(int i=scoreHoles.Count; i < partie.GolfCourse.Holes.Count; i++)
+            for (int i = scoreHoles.Count; i < partie.GolfCourse.Holes.Count; i++)
             {
-                DisplayScoreCard ds = new DisplayScoreCard(i+1, partie.GolfCourse.Holes.ElementAt<Hole>(i).Par);
+                DisplayScoreCard ds = new DisplayScoreCard(i + 1, partie.GolfCourse.Holes.ElementAt<Hole>(i).Par);
                 ScoreCard.Add(ds);
             }
             ListHole.ItemsSource = ScoreCard;
@@ -414,7 +420,7 @@ namespace GreenSa.ViewController.Play.Game
         }
 
         /**
-         * This method is used when the position of the user is being loading
+         * This method is used when the position of the user is being loaded
          * Shows the load icon and hides the other ones (no little button when localizing)
          */
         private void showLoad()
@@ -430,7 +436,7 @@ namespace GreenSa.ViewController.Play.Game
         }
 
         /**
-         * This method is used when the user is ready to chose a target and to shot
+         * This method is used when the user is ready to chose a target and to shoot
          * Shows the ball icon and hides the other ones (relocalize little button is shown)
          */
         private void showBall()
@@ -491,12 +497,12 @@ namespace GreenSa.ViewController.Play.Game
         {
             switch (state)
             {
-                case 0://ready to shot
+                case 0://player is ready to shoot (the user is at the "initial" position)
                     showRadar();
                     map.lockTarget();
                     break;
 
-                case 1://ready to localize
+                case 1://ready to localize the ball (the ball has landed and the player is at the "final" position)
                     MyPosition newUserPosition = await localize();
                     MyPosition start = map.getUserPosition();
                     partie.addPositionForCurrentHole(start, new MyPosition(map.TargetPin.Position.Latitude, map.TargetPin.Position.Longitude), newUserPosition);
@@ -504,11 +510,11 @@ namespace GreenSa.ViewController.Play.Game
                     map.setUserPosition(newUserPosition, partie.Shots.Count);
                     map.setTargetMovable();
                     updateDistance();
-                    showBall();
+                    showBall();//state returns to 0
                     break;
 
-                default://the user is ready to shot by default
-                    showBall();
+                default://the user is ready to shoot by default
+                    showBall();//state returns to 0
                     break;
             }
         }
@@ -519,9 +525,12 @@ namespace GreenSa.ViewController.Play.Game
          */
         private void onClubSelectionClicked(object sender, EventArgs e)
         {
-            if(clubselection.IsVisible == false) {
+            if (clubselection.IsVisible == false)
+            {
                 showClubs();
-            } else {
+            }
+            else
+            {
                 hideClubs();
             }
         }
@@ -532,9 +541,12 @@ namespace GreenSa.ViewController.Play.Game
          */
         private void OnScoreClicked(object sender, EventArgs e)
         {
-            if (ListHole.IsVisible == false) {
+            if (ListHole.IsVisible == false)
+            {
                 showCard();
-            } else {
+            }
+            else
+            {
                 hideCard();
             }
         }
@@ -575,7 +587,8 @@ namespace GreenSa.ViewController.Play.Game
                         {
                             base.OnBackButtonPressed();
                             await Navigation.PopToRootAsync();
-                        } else
+                        }
+                        else
                         {
                             if (await DisplayAlert("Sauvegarder", "Voulez vous sauvegarder cette partie ?", "Oui", "Non"))
                             {
@@ -587,7 +600,8 @@ namespace GreenSa.ViewController.Play.Game
                                 await Navigation.PopToRootAsync();
                             }
                         }
-                    } else
+                    }
+                    else
                     {
                         base.OnBackButtonPressed();
                         await Navigation.PopToRootAsync();
