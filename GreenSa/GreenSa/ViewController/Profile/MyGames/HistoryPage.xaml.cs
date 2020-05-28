@@ -255,7 +255,7 @@ namespace GreenSa.ViewController.Profile.MyGames
                     //reloads the old game data from the database to discard the changes
                     await connection.CreateTableAsync<ScorePartie>();
                     ScorePartie scorePartie = await SQLiteNetExtensionsAsync.Extensions.ReadOperations.GetWithChildrenAsync<ScorePartie>(connection,Sp.Id, recursive: true);
-                    ((DetailsPartiePage)navStack[navStack.Count - 1]).changeScorePartie(scorePartie);
+                    ((DetailsPartiePage)navStack[navStack.Count - 1]).changeScorePartie(scorePartie);//Updates the score displayed on DetailsPartiePage which is now the current page
 
                 }
 

@@ -51,8 +51,8 @@ namespace GreenSa.Models.GolfModel
 
         public DateTime Date { get; set; }
 
-        //A value that the user can input manually to change the distance displayed for a shot
-        //By default it's -1 the value won't be used and the normal distance will be displayed instead
+        //A value that the user can input manually in HistoryPage to change the distance displayed for a shot
+        //By default it's -1, the value won't be used and the normal distance will be displayed instead
         public int EditedDistance { get; set; }
 
         //Hole that the user was playing while making this shot
@@ -83,7 +83,7 @@ namespace GreenSa.Models.GolfModel
             }
         }
 
-        //Used to display the distance of the shot on HistoryPage or HoleFinishedPage
+        //Used to display/edit the distance of the shot on HistoryPage or HoleFinishedPage
         [Ignore]
         public int DistanceDone
         {
